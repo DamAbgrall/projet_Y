@@ -4,12 +4,16 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { LoginPage } from '../pages/login/login';
+import { NewEventPage } from '../pages/new-event/new-event';
 import { MapPage } from '../pages/map/map';
+import { ModalTagPage } from '../pages/modal-tag/modal-tag';
+import { EventListPage } from '../pages/event-list/event-list';
+
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = MapPage;
+  rootPage:any = EventListPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {

@@ -1,21 +1,48 @@
-<ion-header>
-    <ion-icon class="menu" name="md-menu" (click)="test()" ></ion-icon>
-</ion-header>
-
+<ion-nav #mycontent></ion-nav>
 
 <ion-content>
-    <div class="map" id="map">  
-        <ion-fab bottom center>
+    <div class="map" id="map">
+        <ion-grid>
+            <ion-row>
+                <ion-col col-10>
+                    <ion-item>
+                        <ion-input placeholder="Je cherche ..." type="text" value=""></ion-input>
+                    </ion-item>
+                </ion-col>
+                <ion-col style="background-color: white" col-2>
+                    <ion-icon class="menu" name="md-menu" (click)="openMenu()" ></ion-icon>
+                </ion-col>
+           </ion-row>
+        </ion-grid>
+        <ion-fab id="fab" bottom center>
             <button ion-fab class="bc-blanc"><img src="images/projet-y.png"/></button>
             <ion-fab-list side="left">
-                <button ion-fab class="bc-vert"><ion-icon name="logo-facebook"></ion-icon></button>
+                <button (click)="goTo('newEvent')" ion-fab class="bc-vert"><img class="filter-size2" src="images/makerplus.png"/></button>
             </ion-fab-list>
             <ion-fab-list side="right">
                 <button ion-fab class="bc-jaune"><ion-icon class="t-blanc" name="ios-list"></ion-icon></button>
             </ion-fab-list>
             <ion-fab-list side="top">
-                <button ion-fab class="bc-rouge"><ion-icon name="logo-facebook"></ion-icon></button>
+                <button ion-fab class="bc-rouge"><img class="filter-size" src="images/filter.png"/></button>
             </ion-fab-list>
         </ion-fab> 
     </div>
+
+    <ion-menu (ionOpen)="setMapClickable(false)" (ionClose)="setMapClickable(true)" [content]="mycontent" side="right" id="right" swipeEnabled="false">
+        <ion-content>
+            <div class="profil">
+                <img src="images/yellow-point.png"/> 
+                <h4>NOM PRENOM</h4>
+            </div>
+            <ion-list>
+                <ion-item (click)="goTo('param')">
+                    <ion-label>Paramètres</ion-label>
+                </ion-item>
+                <ion-item (click)="goTo('comingEvents')">
+                    <ion-label>Evènement à venir</ion-label>
+                </ion-item>
+            </ion-list>
+            <div style="background-color:lightgray;text-align: center;height: 100%;">PUB</div>
+        </ion-content>
+    </ion-menu>
 </ion-content>

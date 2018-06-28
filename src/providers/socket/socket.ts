@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LocalNotifications } from '@ionic-native/local-notifications';
-import { Observable } from 'rxjs/Observable';
 import io from 'socket.io'
 @Injectable()
 export class SocketProvider {

@@ -19,6 +19,11 @@ export class LoginPage {
   constructor(public navCtrl: NavController,public googlePlus: GooglePlus,public fb: Facebook,public twitter: TwitterConnect,public http: HttpClient,public socketProvider:SocketProvider) {
   }
 
+  skip(){
+    console.log("test")
+    this.navCtrl.setRoot(MapPage);
+  }
+
   GGLogin(){
     let params = {
       'webClientId':'154329307674-t196vefq5hintetkl1bd0810avfapjpu.apps.googleusercontent.com'
@@ -28,7 +33,7 @@ export class LoginPage {
       this.login(res.givenName,res.familyName,"",res.email,res.userId,"Google").then(res=>{
         console.log(res);
         this.socketProvider.socketLogin(res._id);
-        this.navCtrl.setRoot(MapPage);
+        
       }).catch(err=>{
         console.error(err)
       })

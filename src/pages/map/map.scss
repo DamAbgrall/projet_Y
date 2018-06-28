@@ -5,9 +5,20 @@ page-map {
     }
     .menu{
         font-size: 2.5em;
-        margin-left: 90%;
+        float: right;
+        margin-right: 10px;
     }
     ion-fab[bottom] {
         bottom: 25px;
+    }
+    .filter-size{
+        width: 20px;
+    }
+    .filter-size2{
+        width: 24px;
+    }
+    .profil{
+        text-align: center;
+        padding-top: 20px;
     }
 }
