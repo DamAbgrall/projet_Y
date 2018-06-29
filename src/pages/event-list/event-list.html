@@ -1,3 +1,30 @@
-<ion-content padding>
-
+<ion-content>
+    <ion-card [ngClass]="test(event.title)" *ngFor="let event of eventList" padding>
+        <h2>{{event.title}}</h2>
+        <p>
+            <b>{{event.dateEvent.getDay()}}/{{event.dateEvent.getMonth()}}/{{event.dateEvent.getFullYear()}} à {{event.dateEvent.getHours()}}:{{event.dateEvent.getMinutes()}}</b>
+        </p>
+        <div *ngIf="event.address != null">
+            <p>
+                <b>{{event.address[0].subThoroughfare}} {{event.address[0].thoroughfare}} {{event.address[0].postalCode}} {{event.address[0].locality}}
+                    {{event.address[0].country}}
+                </b>
+            </p>
+        </div>
+        <p class="test">{{event.description}}</p>
+        <ion-grid>
+            <ion-row>
+                <ion-col col-10>
+                    <span class="card-size" *ngFor="let tag of event.tags">
+                        <i>{{tag}}</i>
+                    </span>
+                </ion-col>
+                <ion-col col-2>
+                    <button class="plus-btn" ion-button>
+                        <ion-icon name="add"></ion-icon>
+                    </button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-card>
 </ion-content>

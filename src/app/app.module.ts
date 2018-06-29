@@ -6,7 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { Facebook } from '@ionic-native/facebook';
 import { TwitterConnect } from '@ionic-native/twitter-connect';
-import { GoogleMaps} from '@ionic-native/google-maps';
+import { GoogleMaps,Geocoder} from '@ionic-native/google-maps';
 import { HttpClientModule } from '@angular/common/http';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { Camera } from '@ionic-native/camera';
@@ -55,6 +55,7 @@ import { SocketProvider } from '../providers/socket/socket';
     TwitterConnect,
     SplashScreen,
     GoogleMaps,
+    Geocoder,
     LocalNotifications,
     Camera,
     Crop,
