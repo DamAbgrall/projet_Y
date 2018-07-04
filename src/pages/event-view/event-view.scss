@@ -1,0 +1,89 @@
+page-event-view {
+    .desc {
+        text-align: justify;
+    }
+
+    .card-size {
+        margin: 4px;
+    }
+    .logo-size {
+        width: 35px;
+        margin-left: 5px;
+    }
+    .sub-button {
+        height: 45px;
+        margin: 0px;
+        padding: 0px;
+        background-color: #34e7e4;
+        color: #000000;
+        span.button-inner {
+            font-size: 2rem;
+            text-transform: initial;
+            background: linear-gradient(to top right, transparent 51%, rgba(0, 0, 0, 0.2) 52%);
+        }
+    }
+    ion-label {
+        white-space: initial;
+        text-align: justify;
+    }
+    .label-md {
+        margin: 10px 0px 10px 0;
+    }
+    .item-md {
+        padding-left: 8px;
+    }
+    .profil-pic {
+        float: left;
+        width: 75px;
+    }
+    .creator-div {
+        height: 75px;
+        top: 130px;
+    }
+    .grid-absolute {
+        position: absolute;
+        top: 120px;
+    }
+    .header-img {
+        background-image: url("file:///android_asset/www/images/60277c31ce5030f22d5df389083e8fe9.png");
+        /* Set a specific height */
+        min-height: 180px;
+        /* Create the parallax scrolling effect */
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .rond {
+        border-radius: 50%;
+        background-color: #ffffff;
+        border: 1px solid #ced6e0;
+    }
+    .rouge {
+        background: linear-gradient(to top left, #fc716a 49%, #DD635D, #fe574e 51%);
+    }
+    .jaune {
+        background: linear-gradient(to top left, #fdcf79 49.5%, #DDB56A, #fdc661 50.5%);
+    }
+    .violet {
+        background: linear-gradient(to top left, #868dde 49.5%, #757BC2, #6f75d7 50.5%);
+    }
+    .vert {
+        background: linear-gradient(to top left, #4ad292 49.5%, #41B880, #26cb7e 50.5%);
+    }
+    .noir {
+        background-color: #000000;
+    }
+    .comment-text {
+        border: 1px solid #ced6e0;
+        text-align: justify;
+        margin: 30px 20px;
+        padding: 10px;
+    }
+    .test {
+        width: 50px;
+        position: relative;
+        top: -25px;
+        left: -20px;
+    }
+}

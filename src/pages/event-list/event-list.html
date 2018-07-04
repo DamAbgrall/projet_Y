@@ -1,30 +1,44 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>eventView</ion-title>
+    </ion-navbar>
+
+</ion-header>
 <ion-content>
-    <ion-card [ngClass]="test(event.title)" *ngFor="let event of eventList" padding>
-        <h2>{{event.title}}</h2>
-        <p>
-            <b>{{event.dateEvent.getDay()}}/{{event.dateEvent.getMonth()}}/{{event.dateEvent.getFullYear()}} à {{event.dateEvent.getHours()}}:{{event.dateEvent.getMinutes()}}</b>
-        </p>
-        <div *ngIf="event.address != null">
-            <p>
-                <b>{{event.address[0].subThoroughfare}} {{event.address[0].thoroughfare}} {{event.address[0].postalCode}} {{event.address[0].locality}}
-                    {{event.address[0].country}}
-                </b>
-            </p>
+    <ion-card [ngClass]="getColor(event.categ)" *ngFor="let event of eventList">
+        <div class="overlay">
+            <div padding>
+                <h2>{{event.title}}</h2>
+                <p>
+                    <b>
+                        <span *ngIf="event.dateEvent.getDate()<10">0</span>{{event.dateEvent.getDate()}}/<span *ngIf="event.dateEvent.getMonth()+1<10">0</span>{{event.dateEvent.getMonth()+1}}/{{event.dateEvent.getFullYear()}} à
+                        <span *ngIf="event.dateEvent.getHours()<10">0</span>{{event.dateEvent.getHours()}}h<span *ngIf="event.dateEvent.getMinutes()<10">0</span>{{event.dateEvent.getMinutes()}}
+                    </b>
+                </p>
+                <div *ngIf="event.address != null">
+                    <p>
+                        <b>{{event.address[0].subThoroughfare}} {{event.address[0].thoroughfare}} {{event.address[0].postalCode}}
+                            {{event.address[0].locality}} {{event.address[0].country}}
+                        </b>
+                    </p>
+                </div>
+                <p class="desc">{{event.description}}</p>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col col-10>
+                            <span class="card-size" *ngFor="let tag of event.tags">
+                                <i>#{{tag}}</i>
+                            </span>
+                        </ion-col>
+                        <ion-col col-2>
+                            <button (click)="detail(event)" class="plus-btn" ion-button>
+                                <ion-icon name="add"></ion-icon>
+                            </button>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </div>
         </div>
-        <p class="test">{{event.description}}</p>
-        <ion-grid>
-            <ion-row>
-                <ion-col col-10>
-                    <span class="card-size" *ngFor="let tag of event.tags">
-                        <i>{{tag}}</i>
-                    </span>
-                </ion-col>
-                <ion-col col-2>
-                    <button class="plus-btn" ion-button>
-                        <ion-icon name="add"></ion-icon>
-                    </button>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
     </ion-card>
 </ion-content>

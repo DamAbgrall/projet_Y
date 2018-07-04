@@ -1,0 +1,84 @@
+<!--
+  Generated template for the EventViewPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>eventView</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="scroll">
+  <div *ngIf="event != null">
+    <div class="header-img"></div>
+    <ion-grid class="grid-absolute">
+      <ion-row>
+        <ion-col col-4>
+          <img class="rond" src="images/yellow-point.png" />
+        </ion-col>
+        <ion-col col-8>
+          <h2>{{event.title}}</h2>
+          <span>par {{event.creator.username}}</span>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div [ngClass]="getColor(event.categ)" style="padding-top: 35px;" padding>
+      <p>
+        <span *ngIf="event.dateEvent.getDate()<10">0</span>{{event.dateEvent.getDate()}}/
+        <span *ngIf="event.dateEvent.getMonth()+1<10">0</span>{{event.dateEvent.getMonth()+1}}/{{event.dateEvent.getFullYear()}} à
+        <span *ngIf="event.dateEvent.getHours()<10">0</span>{{event.dateEvent.getHours()}}h
+        <span *ngIf="event.dateEvent.getMinutes()<10">0</span>{{event.dateEvent.getMinutes()}}
+      </p>
+      <div *ngIf="event.address != null">
+        <p>
+          <b>{{event.address[0].subThoroughfare}} {{event.address[0].thoroughfare}} {{event.address[0].postalCode}} {{event.address[0].locality}}
+            {{event.address[0].country}}
+          </b>
+        </p>
+      </div>
+      <p class="desc">{{event.description}}</p>
+      <span class="card-size" *ngFor="let tag of event.tags">
+        <i>#{{tag}}</i>
+      </span>
+    </div>
+    <button ion-button full class="sub-button">M'inscrire
+      <img class="logo-size" src="images/projet-y.png" />
+    </button>
+    <ion-segment [(ngModel)]="menu">
+      <ion-segment-button value="part">
+        Participants
+      </ion-segment-button>
+      <ion-segment-button value="com">
+        Commentaires
+      </ion-segment-button>
+    </ion-segment>
+
+    <div [ngSwitch]="menu">
+      <ion-list *ngSwitchCase="'part'">
+        <ion-item *ngFor="let user of event.participants">
+          <ion-thumbnail item-start>
+            <img class="rond" src="{{user.picture}}">
+          </ion-thumbnail>
+          <h2>{{user.username}}</h2>
+        </ion-item>
+      </ion-list>
+
+      <div *ngSwitchCase="'com'">
+        <div *ngFor="let comments of event.commentary">
+          <div class="comment-text">
+            <div style="height: 0px;">
+                <img class="rond test" src="{{comments.picture}}">
+            </div>
+            <p style="margin: 5px 0px;padding-left: 35px">{{comments.username}}</p>
+            <small>{{comments.comment}}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
