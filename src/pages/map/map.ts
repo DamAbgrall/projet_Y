@@ -4,7 +4,8 @@ import { MapProvider } from '../../providers/map/map';
 import { GoogleMap } from '@ionic-native/google-maps';
 import { NewEventPage } from '../new-event/new-event';
 import { EventListPage } from '../event-list/event-list';
-
+import { MyEventPage } from '../my-event/my-event';
+import { SettingsPage } from '../settings/settings';
 @Component({
   selector: 'page-map',
   templateUrl: 'map.html',
@@ -14,8 +15,8 @@ export class MapPage {
   map: GoogleMap;
   x = 0;
   viewList = {
-    'param': 'test1',
-    'comingEvents': 'test2',
+    'param': SettingsPage,
+    'comingEvents': MyEventPage,
     'newEvent': NewEventPage,
     'EventListPage':EventListPage
   }

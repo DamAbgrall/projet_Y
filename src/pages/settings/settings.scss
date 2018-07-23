@@ -1,0 +1,88 @@
+page-settings {
+    h5{
+        text-align: center;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+    ion-row{
+        border-bottom: 1px solid lightgray
+    }
+    .inline{
+        display: inline-flex;
+        width: 100%
+    }
+    .col{
+        padding: 15px 5px;
+    }
+    .add-button{
+        margin:1rem 0rem
+    }
+    .grid{
+        padding:0px;
+    }
+    .toggle-right{
+        position: absolute;
+        right: 0px;
+    }
+    .orange.toggle-md.toggle-checked .toggle-icon{
+        background-color: #FFE0A4;
+    }
+    .orange.toggle-md.toggle-checked .toggle-inner{
+        background-color: #ffc048;
+    }
+    .vert.toggle-md.toggle-checked .toggle-icon{
+        background-color: #82E2B5;
+    }
+    .vert.toggle-md.toggle-checked .toggle-inner{
+        background-color: #05c46b;
+    }
+    .violet.toggle-md.toggle-checked .toggle-icon{
+        background-color: #ABAFE7;
+    }
+    .violet.toggle-md.toggle-checked .toggle-inner{
+        background-color: #575fcf;
+    }
+    .rouge.toggle-md.toggle-checked .toggle-icon{
+        background-color: #FFB7B3;
+    }
+    .rouge.toggle-md.toggle-checked .toggle-inner{
+        background-color: #ff3f34;
+    }
+
+    .chip-orange{
+        background-color:#FFE0A4;
+        button{
+            color: #ffc048
+        }
+    }
+    .chip-vert{
+        background-color:#82E2B5;
+        button{
+            color: #05c46b
+        }
+    }
+    .chip-violet{
+        background-color:#ABAFE7;
+        button{
+            color: #575fcf
+        }
+    }
+    .chip-rouge{
+        background-color:#FFB7B3;
+        button{
+            color: #ff3f34
+        }
+    }
+    .plus-btn {
+        float: right;
+        background-color: #34e7e4;
+        color: #ffffff;
+        font-size: 2em;
+        padding:0px;
+        span.button-inner{
+            padding: 0 7.5px;
+            background:linear-gradient(to right, transparent 51%, rgba(0, 0, 0, 0.15) 52%);
+        }
+    }
+
+}

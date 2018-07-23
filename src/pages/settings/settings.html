@@ -1,0 +1,86 @@
+<!--
+  Generated template for the SettingsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>settings</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div class="inline">
+          <h5>Loisir</h5>
+          <ion-toggle [(ngModel)]="Loisir" class="orange toggle-right"></ion-toggle>
+        </div>
+        <button [disabled]="!Loisir" (click)="showLoisirTagModal()" class="plus-btn" ion-button>
+          <ion-icon name="add"></ion-icon>
+        </button>
+        <ion-chip class="chip-orange" *ngFor="let tag of LoisirTagList">
+          <ion-label>{{tag}}</ion-label>
+          <button ion-button clear color="dark" (click)="delete(tag,LoisirTagList)">
+            <ion-icon name="close-circle"></ion-icon>
+          </button>
+        </ion-chip>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div class="inline">
+          <h5>Plein air</h5>
+          <ion-toggle [(ngModel)]="PleinAir" class="vert toggle-right"></ion-toggle>
+        </div>
+        <button [disabled]="!PleinAir" (click)="showPleinAirTagModal()" class="plus-btn" ion-button>
+          <ion-icon name="add"></ion-icon>
+        </button>
+        <ion-chip class="chip-vert" *ngFor="let tag of PleinAirTagList">
+          <ion-label>{{tag}}</ion-label>
+          <button ion-button clear color="dark" (click)="delete(tag,PleinAirTagList)">
+            <ion-icon name="close-circle"></ion-icon>
+          </button>
+        </ion-chip>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div class="inline">
+          <h5>Sortie</h5>
+          <ion-toggle [(ngModel)]="Sortie" class="violet toggle-right"></ion-toggle>
+        </div>
+        <button [disabled]="!Sortie" (click)="showSortieTagModal()" class="plus-btn" ion-button>
+          <ion-icon name="add"></ion-icon>
+        </button>
+        <ion-chip class="chip-violet" *ngFor="let tag of SortieTagList">
+          <ion-label>{{tag}}</ion-label>
+          <button ion-button clear color="dark" (click)="delete(tag,SortieTagList)">
+            <ion-icon name="close-circle"></ion-icon>
+          </button>
+        </ion-chip>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div class="inline">
+          <h5>Evenement</h5>
+          <ion-toggle [(ngModel)]="Evenement" class="rouge toggle-right"></ion-toggle>
+        </div>
+        <button [disabled]="!Evenement" (click)="showEvenementTagModal()" class="plus-btn" ion-button>
+          <ion-icon name="add"></ion-icon>
+        </button>
+        <ion-chip class="chip-rouge" *ngFor="let tag of EvenementTagList">
+          <ion-label>{{tag}}</ion-label>
+          <button ion-button clear color="dark" (click)="delete(tag,EvenementTagList)">
+            <ion-icon name="close-circle"></ion-icon>
+          </button>
+        </ion-chip>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -4,13 +4,13 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
 import io from 'socket.io'
 @Injectable()
 export class SocketProvider {
-  
+
   public socket
 
-  constructor(public http: HttpClient,public notif:LocalNotifications) {
+  constructor(public http: HttpClient, public notif: LocalNotifications) {
     console.log('Hello SocketProvider Provider');
   }
-  socketLogin(userId){
+  socketLogin(userId) {
     console.log("Login")
     var connectionOptions = {
       "force new connection": true,
@@ -20,8 +20,8 @@ export class SocketProvider {
       "query": "userId=" + userId
     };
     var socketHost = "http://192.168.0.60:8080";
-    this.socket = io(socketHost,connectionOptions);
-    this.socket.on("new_notification",(name, fn) =>{
+    this.socket = io(socketHost, connectionOptions);
+    this.socket.on("new_notification", (name, fn) => {
       console.log(name);
       fn("success");
       this.notif.schedule({
@@ -31,7 +31,7 @@ export class SocketProvider {
     })
   }
 
-  send(eventName,eventData){
-    this.socket.emit(eventName,eventData);
+  send(eventName, eventData) {
+    this.socket.emit(eventName, eventData);
   }
 }

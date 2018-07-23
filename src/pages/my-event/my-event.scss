@@ -1,0 +1,65 @@
+page-my-event {
+    [padding] h1:first-child,
+    [padding] h2:first-child,
+    [padding] h3:first-child,
+    [padding] h4:first-child,
+    [padding] h5:first-child,
+    [padding] h6:first-child {
+        margin-top: 0.3rem;
+    }
+    .rouge {
+        background-color: #ff3f34;
+        background:linear-gradient(to top left, #fc716a 49%, #DD635D, #fe574e 51%);
+    }
+    .jaune {
+        background:linear-gradient(to top left, #fdcf79 49.5%, #DDB56A, #fdc661 50.5%);
+    }
+    .violet {
+        background-color: #575fce;
+        background:linear-gradient(to top left, #868dde 49.5%, #757BC2, #6f75d7 50.5%);
+    }
+    .vert {
+        background-color: #06c46c;
+        background:linear-gradient(to top left, #4ad292 49.5%, #41B880, #26cb7e 50.5%);
+    }
+    .noir{
+        background-color: #000000;
+    }
+    .card-size {
+        margin: 4px;
+        padding-bottom: 2px;
+        line-height: 1.4;
+    }
+
+    .desc {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+        text-align: justify;
+        margin-bottom: 5px;
+    }
+    .plus-btn {
+        float: right;
+        background-color: #34e7e4;
+        color: #ffffff;
+        font-size: 2em;
+        padding:0px;
+        span.button-inner{
+            padding: 0 7.5px;
+            background:linear-gradient(to right, transparent 51%, rgba(0, 0, 0, 0.15) 52%);
+        }
+    }
+    .grid {
+        padding: 0px;
+    }
+    [col-10] {
+        padding-left: 0px;
+        padding-top: 0px;
+        padding-right: 5px;
+        padding-bottom: 0px;
+    }
+    [col-2] {
+        padding: 0px;
+    }
+}

@@ -21,6 +21,8 @@ import { modalGooglePlacesPage } from '../pages/modalGooglePlaces/modalGooglePla
 import { ModalTagPage } from '../pages/modal-tag/modal-tag';
 import { EventListPage } from '../pages/event-list/event-list';
 import { EventViewPage } from '../pages/event-view/event-view';
+import { MyEventPage } from '../pages/my-event/my-event';
+import { SettingsPage } from '../pages/settings/settings';
 import { MapProvider } from '../providers/map/map';
 import { SocketProvider } from '../providers/socket/socket';
 
@@ -33,7 +35,9 @@ import { SocketProvider } from '../providers/socket/socket';
     modalGooglePlacesPage,
     ModalTagPage,
     EventListPage,
-    EventViewPage
+    EventViewPage,
+    MyEventPage,
+    SettingsPage
   ],
   imports: [
     BrowserModule,
@@ -49,7 +53,9 @@ import { SocketProvider } from '../providers/socket/socket';
     modalGooglePlacesPage,
     ModalTagPage,
     EventListPage,
-    EventViewPage
+    EventViewPage,
+    MyEventPage,
+    SettingsPage
   ],
   providers: [
     StatusBar,
