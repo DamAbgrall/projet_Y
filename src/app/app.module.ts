@@ -23,6 +23,7 @@ import { EventListPage } from '../pages/event-list/event-list';
 import { EventViewPage } from '../pages/event-view/event-view';
 import { MyEventPage } from '../pages/my-event/my-event';
 import { SettingsPage } from '../pages/settings/settings';
+import { ModalFilterPage } from '../pages/modal-filter/modal-filter';
 import { MapProvider } from '../providers/map/map';
 import { SocketProvider } from '../providers/socket/socket';
 
@@ -37,7 +38,8 @@ import { SocketProvider } from '../providers/socket/socket';
     EventListPage,
     EventViewPage,
     MyEventPage,
-    SettingsPage
+    SettingsPage,
+    ModalFilterPage
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,8 @@ import { SocketProvider } from '../providers/socket/socket';
     EventListPage,
     EventViewPage,
     MyEventPage,
-    SettingsPage
+    SettingsPage,
+    ModalFilterPage
   ],
   providers: [
     StatusBar,

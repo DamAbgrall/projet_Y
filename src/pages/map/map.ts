@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, MenuController } from 'ionic-angular';
+import { ModalController,NavController, NavParams, MenuController } from 'ionic-angular';
 import { MapProvider } from '../../providers/map/map';
 import { GoogleMap } from '@ionic-native/google-maps';
 import { NewEventPage } from '../new-event/new-event';
 import { EventListPage } from '../event-list/event-list';
 import { MyEventPage } from '../my-event/my-event';
 import { SettingsPage } from '../settings/settings';
+import { ModalFilterPage } from '../modal-filter/modal-filter';
+
 @Component({
   selector: 'page-map',
   templateUrl: 'map.html',
@@ -21,7 +23,7 @@ export class MapPage {
     'EventListPage':EventListPage
   }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public mapProvider: MapProvider, public menuCtrl: MenuController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public mapProvider: MapProvider, public menuCtrl: MenuController,public modalCtrl: ModalController) {
 
   }
   ngAfterViewInit() {
@@ -46,5 +48,13 @@ export class MapPage {
   }
   goTo(viewName) {
     this.navCtrl.push(this.viewList[viewName]);
+  }
+
+  openFilter(){
+    let modal = this.modalCtrl.create(ModalFilterPage);
+    modal.onDidDismiss(data => {
+      console.log(data);
+    })
+    modal.present();
   }
 }

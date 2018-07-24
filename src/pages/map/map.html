@@ -23,11 +23,10 @@
                 <button (click)="goTo('EventListPage')" ion-fab class="bc-jaune"><ion-icon class="t-blanc" name="ios-list"></ion-icon></button>
             </ion-fab-list>
             <ion-fab-list side="top">
-                <button ion-fab class="bc-rouge"><img class="filter-size" src="images/filter.png"/></button>
+                <button (click)="openFilter()" ion-fab class="bc-rouge"><img class="filter-size" src="images/filter.png"/></button>
             </ion-fab-list>
         </ion-fab> 
     </div>
-
     <ion-menu (ionOpen)="setMapClickable(false)" (ionClose)="setMapClickable(true)" [content]="mycontent" side="right" id="right" swipeEnabled="false">
         <ion-content>
             <div class="profil">

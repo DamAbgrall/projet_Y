@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>settings</ion-title>
+    <ion-title>Paramètres</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -25,7 +25,7 @@
         </button>
         <ion-chip class="chip-orange" *ngFor="let tag of LoisirTagList">
           <ion-label>{{tag}}</ion-label>
-          <button ion-button clear color="dark" (click)="delete(tag,LoisirTagList)">
+          <button [disabled]="!Loisir" ion-button clear color="dark" (click)="delete(tag,LoisirTagList)">
             <ion-icon name="close-circle"></ion-icon>
           </button>
         </ion-chip>
@@ -42,7 +42,7 @@
         </button>
         <ion-chip class="chip-vert" *ngFor="let tag of PleinAirTagList">
           <ion-label>{{tag}}</ion-label>
-          <button ion-button clear color="dark" (click)="delete(tag,PleinAirTagList)">
+          <button [disabled]="!PleinAir" ion-button clear color="dark" (click)="delete(tag,PleinAirTagList)">
             <ion-icon name="close-circle"></ion-icon>
           </button>
         </ion-chip>
@@ -59,7 +59,7 @@
         </button>
         <ion-chip class="chip-violet" *ngFor="let tag of SortieTagList">
           <ion-label>{{tag}}</ion-label>
-          <button ion-button clear color="dark" (click)="delete(tag,SortieTagList)">
+          <button [disabled]="!Sortie" ion-button clear color="dark" (click)="delete(tag,SortieTagList)">
             <ion-icon name="close-circle"></ion-icon>
           </button>
         </ion-chip>
@@ -76,7 +76,7 @@
         </button>
         <ion-chip class="chip-rouge" *ngFor="let tag of EvenementTagList">
           <ion-label>{{tag}}</ion-label>
-          <button ion-button clear color="dark" (click)="delete(tag,EvenementTagList)">
+          <button [disabled]="!Evenement" ion-button clear color="dark" (click)="delete(tag,EvenementTagList)">
             <ion-icon name="close-circle"></ion-icon>
           </button>
         </ion-chip>
