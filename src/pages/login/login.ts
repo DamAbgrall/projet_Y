@@ -7,16 +7,15 @@ import { MapPage } from '../map/map';
 import { HttpClient} from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { SocketProvider } from '../../providers/socket/socket';
+import {RequestProvider } from '../../providers/request/request';
+
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
 })
 export class LoginPage {
 
-  event
-  data
-
-  constructor(public navCtrl: NavController,public googlePlus: GooglePlus,public fb: Facebook,public twitter: TwitterConnect,public http: HttpClient,public socketProvider:SocketProvider) {
+  constructor(public navCtrl: NavController,public googlePlus: GooglePlus,public fb: Facebook,public twitter: TwitterConnect,public http: HttpClient,public socketProvider:SocketProvider,public request :RequestProvider ) {
   }
 
   skip(){
@@ -30,10 +29,10 @@ export class LoginPage {
     }
     this.googlePlus.login(params).then(res => {
       console.log(res)
-      this.login(res.givenName,res.familyName,"",res.email,res.userId,"Google").then(res=>{
+      this.request.login(res.givenName,res.familyName,"",res.email,res.userId,"Google").then(res=>{
         console.log(res);
         this.socketProvider.socketLogin(res._id);
-        
+        this.navCtrl.setRoot(MapPage);
       }).catch(err=>{
         console.error(err)
       })
@@ -46,7 +45,7 @@ export class LoginPage {
     this.fb.login(['public_profile', 'user_friends', 'email']).then((res) => {
       console.log(res);
       this.http.get("https://graph.facebook.com/v3.0/1826771280708609?fields=id,first_name,last_name,email&access_token="+res.authResponse.accessToken).subscribe((data:any)=>{
-        this.login(data.name,data.last_name,"",data.email,res.authResponse.userID,"Facebook").then(res=>{
+        this.request.login(data.name,data.last_name,"",data.email,res.authResponse.userID,"Facebook").then(res=>{
           this.socketProvider.socketLogin(res._id);
           console.log(res);
           this.navCtrl.setRoot(MapPage);
@@ -65,7 +64,7 @@ export class LoginPage {
         console.log(res)
       }).catch(err=>{
         console.log(err);
-        this.login("","",err.name,"",err.id,"Twitter").then(res=>{
+        this.request.login("","",err.name,"",err.id,"Twitter").then(res=>{
           this.socketProvider.socketLogin(res._id);
           console.log(res);
           this.navCtrl.setRoot(MapPage);
@@ -76,32 +75,6 @@ export class LoginPage {
     }).catch((err)=>{
       console.error(err);
     });
-  }
-
-  test(){
-    this.socketProvider.send(this.event,this.data);
-  }
-  login(name,firstname,username,email,password,connection_type){
-    return new Promise<any>((resolve, reject) => {
-      let url="http://192.168.0.60:3000/auth";
-      let option = {
-        username:username||"",
-        email:email||"",
-        idUserNetwork :password,
-        connection_type:connection_type,
-        firstname:firstname,
-        name:name
-      }
-      this.http.post(url,option).subscribe((res)=>{
-        console.log(res)
-        if (res){
-          resolve(res);
-        }else{
-          reject(res);
-        }
-        
-      })
-    })
   }
 
 }

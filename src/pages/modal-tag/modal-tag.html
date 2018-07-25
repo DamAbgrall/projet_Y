@@ -22,7 +22,7 @@
   <button style="width: 48%" (click)="dismiss()" ion-button>Annuler</button>
   <ion-list>
     <ion-item *ngFor="let tag of viewList">
-      <ion-label>{{tag}}</ion-label>
+      <ion-label>#{{tag}}</ion-label>
       <ion-checkbox [(ngModel)]="result[tag]"></ion-checkbox>
     </ion-item>
   </ion-list>

@@ -26,6 +26,7 @@ import { SettingsPage } from '../pages/settings/settings';
 import { ModalFilterPage } from '../pages/modal-filter/modal-filter';
 import { MapProvider } from '../providers/map/map';
 import { SocketProvider } from '../providers/socket/socket';
+import { RequestProvider } from '../providers/request/request';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { SocketProvider } from '../providers/socket/socket';
     File,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     MapProvider,
-    SocketProvider
+    SocketProvider,
+    RequestProvider
   ]
 })
 export class AppModule {}

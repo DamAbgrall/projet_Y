@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { ModalController, NavController, NavParams } from 'ionic-angular';
+import { ModalController, NavController, NavParams,ActionSheetController } from 'ionic-angular';
 import { ModalTagPage } from '../modal-tag/modal-tag';
-
+import { Camera } from '@ionic-native/camera';
+import { Crop } from '@ionic-native/crop';
+import { File } from '@ionic-native/file';
 /**
  * Generated class for the SettingsPage page.
  *
@@ -23,8 +25,72 @@ export class SettingsPage {
   PleinAir: boolean = true;
   Sortie: boolean = true;
   Evenement: boolean = true;
+  lastImage:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController,public actionSheetCtrl: ActionSheetController,public file: File,public crop: Crop,private camera: Camera) {
+  }
+
+
+  public presentActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: "Sélectionner le type d'image",
+      buttons: [
+        {
+          text: 'Choisir une photo existante',
+          handler: () => {
+            this.chooseImage(this.camera.PictureSourceType.PHOTOLIBRARY);
+          }
+        },
+        {
+          text: 'Prendre une nouvelle photo',
+          handler: () => {
+            this.chooseImage(this.camera.PictureSourceType.CAMERA);
+          }
+        },
+        {
+          text: 'Annuler',
+          role: 'cancel'
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  chooseImage(sourceType) {
+    var options = {
+      quality: 100,
+      sourceType: sourceType,
+      saveToPhotoAlbum: false,
+      correctOrientation: true
+    };
+
+    this.camera.getPicture(options).then((imagePath) => {
+      // Special handling for Android library
+      console.log(imagePath);
+      this.crop.crop(imagePath).then(newImage => {
+        //l'image taille normal
+        var tempPathArray = imagePath.split('/');
+        console.log(tempPathArray);
+        var fileName = tempPathArray.pop().replace('-cropped', '').split('?')[0];
+        var filePath = "";
+        for (let str of tempPathArray) {
+          if (filePath == '') {
+            filePath = str;
+          } else {
+            filePath = filePath + '/' + str;
+          }
+        }
+        this.file.removeFile(filePath, fileName).then(data => {
+          console.log(data);
+        }).catch(err => {
+          console.error(err);
+        })
+        console.log(newImage);
+        this.lastImage = newImage;
+      });
+    }, (err) => {
+      console.error(err);
+    });
   }
 
   showLoisirTagModal() {

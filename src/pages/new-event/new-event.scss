@@ -2,17 +2,26 @@ page-new-event {
     .item-md.item-block .item-inner {
         padding-right: 0px;
     }
-
+    .button-round-md{
+        border-radius: 50%;
+    }
     .datetime-md {
         padding: 13px 8px 13px 8px;
     }
     .select-md {
         padding: 13px 8px 13px 8px;
     }
-    .gradient-button{
-        background: linear-gradient(to top right,#34e7e4, #00c4c1);
-        color:#000000;
-        width: 100%
+    .sub-button {
+        height: 45px;
+        margin: 0px;
+        padding: 0px;
+        background-color: #34e7e4;
+        color: #000000;
+        span.button-inner {
+            font-size: 2rem;
+            text-transform: initial;
+            background: linear-gradient(to top right, transparent 51%, rgba(0, 0, 0, 0.2) 52%);
+        }
     }
     .grid{
         padding: 0px

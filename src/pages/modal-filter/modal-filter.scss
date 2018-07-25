@@ -3,13 +3,34 @@ page-modal-filter {
     .button-size{
         width:47%;
     }
+    .item-md{
+        padding-left: 0px;
+    }
+    .vert{
+        color:rgb(0, 204, 0);
+    }
+    .my-loc-btn{
+        margin-top: 1.5rem;
+        margin-bottom: 0px;
+    }
+    .text-ou{
+        padding-top: 20px;
+        padding-left: 5px;
+        padding-right: 5px;    
+    }
+    .button-round-md{
+        border-radius: 50%;
+    }
+    .button-md{
+        padding: 1px 6px;
+    }
 }
 
 page-modal-filter.ion-page {
     width: 90%;
-    height: 68%;
+    height: 82%;
     left:5%;
-    top:17.5%;
+    top:9%;
   }
 ion-app.md [padding] .scroll-content {
     padding: 10px;

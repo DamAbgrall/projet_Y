@@ -20,6 +20,17 @@
   <ion-item>
     <ion-datetime placeholder="Date de fin" displayFormat="YYYY-MM-DD HH:mm"></ion-datetime>
   </ion-item>
+  <div style="display:-webkit-box">
+    <button ion-button (click)="getCurrentPos()" class="my-loc-btn">
+      <ion-icon style="font-size:2em;" [ngClass]="{vert:coordinates != null}" name="md-locate"></ion-icon>
+    </button>
+    <p class="text-ou">
+       Ou 
+    </p>
+    <ion-item style="width: 71%;">
+      <ion-input (click)="showModal()" placeholder="Ville" [(ngModel)]="address"></ion-input>
+    </ion-item>
+  </div>
   <ion-item>
     <ion-input placeholder="Distance en km" type="number"></ion-input>
   </ion-item>
@@ -34,12 +45,12 @@
   <div style="min-height: 45px">
     <div style="padding-left: 16px;">
       <ion-chip *ngFor="let tag of TagList">
-        <ion-label>{{tag}}</ion-label>
+        <ion-label>#{{tag}}</ion-label>
         <button ion-button clear color="dark" (click)="delete(tag)">
           <ion-icon name="close-circle"></ion-icon>
         </button>
       </ion-chip>
-      <button (click)="showTagModal()" style="float: right;" ion-button round icon-only>
+      <button (click)="showTagModal()" style="float: right;;background-color: #00c953;" ion-button round icon-only>
         <ion-icon name="add"></ion-icon>
       </button>
     </div>

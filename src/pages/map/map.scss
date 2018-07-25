@@ -17,6 +17,12 @@ page-map {
     .filter-size2 {
         width: 24px;
     }
+    .menu-pad{
+        padding: 0px;
+        .item-md.item-block .item-inner{
+            border-bottom: 0px;
+        }
+    }
     .profil {
         text-align: center;
         padding-top: 20px;

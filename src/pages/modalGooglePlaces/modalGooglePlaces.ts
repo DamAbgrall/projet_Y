@@ -1,5 +1,5 @@
 ﻿import { Component } from '@angular/core';
-import { NavController, ViewController  } from 'ionic-angular';
+import { NavController, ViewController,NavParams  } from 'ionic-angular';
 
 declare var google: any;
 /*
@@ -20,7 +20,7 @@ export class modalGooglePlacesPage {
     acService: any;
     placesService: any;
 
-    constructor(public navCtrl: NavController, public viewCtrl: ViewController) {
+    constructor(public navCtrl: NavController, public viewCtrl: ViewController,public params: NavParams) {
         this.acService = new google.maps.places.AutocompleteService();
         this.autocompleteItems = [];
         this.autocomplete = {
@@ -44,17 +44,21 @@ export class modalGooglePlacesPage {
             return;
         }
         let self = this;
+        console.log(this.params.get("type"));
         let config = {
-            types: ['geocode'], // other types available in the API: 'establishment', 'regions', and 'cities'
+            types: [this.params.get("type")], // other types available in the API: 'establishment', 'regions', and 'cities'
             input: this.autocomplete.query,
             componentRestrictions: { country: 'FR' }
         }
         this.acService.getPlacePredictions(config, function (predictions, status) {
             console.log('modal > getPlacePredictions > status > ', status);
             self.autocompleteItems = [];
-            predictions.forEach(function (prediction) {
-                self.autocompleteItems.push(prediction);
-            });
+            if(predictions){
+                predictions.forEach(function (prediction) {
+                    self.autocompleteItems.push(prediction);
+                });
+            }
+
         });
     }
 

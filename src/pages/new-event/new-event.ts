@@ -23,7 +23,6 @@ export class NewEventPage {
     set: false,
   };
   TagList = []
-  locationActive = false;
   lastImage = "images/60277c31ce5030f22d5df389083e8fe9.jpg";
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController,public actionSheetCtrl: ActionSheetController,public file: File,public crop: Crop,private camera: Camera) {
   }
@@ -33,11 +32,10 @@ export class NewEventPage {
     this.address.set = false;
     // show modal|
     console.log('call showmodal');
-    let modal = this.modalCtrl.create(modalGooglePlacesPage);
+    let modal = this.modalCtrl.create(modalGooglePlacesPage,{type:"geocode"});
     modal.onDidDismiss(data => {
       console.log('page > modal dismissed > data > ', data);
       if (data) {
-        this.locationActive = false;
         this.address.place = data.description;
         // get details
       }
