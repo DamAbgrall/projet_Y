@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { GoogleMaps, GoogleMap, GoogleMapsEvent, Geocoder, LatLng, GeocoderResult } from '@ionic-native/google-maps';
+import { GoogleMaps, GoogleMap, GoogleMapsEvent, Geocoder, LatLng, MarkerOptions, Marker,GoogleMapsAnimation,HtmlInfoWindow } from '@ionic-native/google-maps';
 
 @Injectable()
 export class MapProvider {
@@ -20,6 +20,7 @@ export class MapProvider {
             this.map.one(GoogleMapsEvent.MAP_READY).then(() => {
                 this.map.setCameraZoom(14);
                 this.map.getMyLocation().then(res => {
+                    console.log(res)
                     this.map.setCameraTarget(res.latLng);
                 }).catch((err) => {
                     console.error(err);
@@ -39,6 +40,7 @@ export class MapProvider {
                     }
                 })
             }
+
             ).catch(err => {
                 console.error(err)
                 reject(err);
@@ -62,7 +64,37 @@ export class MapProvider {
                 reject(err);
             })
         })
-
-
     }
+    addMarker(event) {
+        let options: MarkerOptions = {
+            icon: {
+              url: 'images/yellow-point.png',
+              size: {
+                width: 32,
+                height: 32
+              }
+            },
+            position: {lat: 47.0859231, lng: -1.5591416},
+            visible: true,
+            animation: GoogleMapsAnimation.DROP,
+          };
+
+          let htmlInfoWindow = new HtmlInfoWindow();
+          let frame: HTMLElement = document.createElement('div');
+          frame.innerHTML = [
+            '<h3>VOILA</h3>',
+            '<img src="images/60277c31ce5030f22d5df389083e8fe9.png">'
+          ].join("");
+          htmlInfoWindow.setContent(frame, {
+            width: "200px",
+            height: "200px"
+          });
+  
+        this.map.addMarker(options).then((marker: Marker) => {
+            marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(res=>{
+                
+            })
+        })
+    }
+
 }
