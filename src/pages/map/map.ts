@@ -22,7 +22,7 @@ export class MapPage {
     'newEvent': NewEventPage,
     'EventListPage':EventListPage
   }
-  event={
+  event=[{
     title: "Titre",
     dateEvent: new Date(),
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -37,16 +37,89 @@ export class MapPage {
     startDate: new Date(),
     endDate: new Date(),
     coordinates: {
-      lat: 47.086329,
-      long: -1.558949
+      lat: 47.071482,
+      lng: -1.567236
     },
     address: null,
     tags: ['football', 'basketball', 'rugby', 'patate', 'avion'],
     EventType: "",
-    categ: "a",
+    categ: "s",
+    participants:[{'username':'Participants 1','picture':'images/yellow-point.png'},{'username':'Participants 2','picture':'images/yellow-point.png'}],
+    commentary:[{'username':'Participants 1','picture':'images/yellow-point.png','comment':'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'},{'username':'participants 2','picture':'images/yellow-point.png','comment':'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'}],
+  },{
+    title: "Titre",
+    dateEvent: new Date(),
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    picture: "images/60277c31ce5030f22d5df389083e8fe9.jpg",
+    maxAttendees: 10,
+    creator: {
+      name: "Nom",
+      firstName: 'prénom',
+      username: "pseudo"
+    },
+    isEnd: false,
+    startDate: new Date(),
+    endDate: new Date(),
+    coordinates: {
+      lat: 47.078611,
+      lng: -1.576290
+    },
+    address: null,
+    tags: ['football', 'basketball', 'rugby', 'patate', 'avion'],
+    EventType: "",
+    categ: "e",
+    participants:[{'username':'Participants 1','picture':'images/yellow-point.png'},{'username':'Participants 2','picture':'images/yellow-point.png'}],
+    commentary:[{'username':'Participants 1','picture':'images/yellow-point.png','comment':'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'},{'username':'participants 2','picture':'images/yellow-point.png','comment':'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'}],
+  },{
+    title: "Titre",
+    dateEvent: new Date(),
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    picture: "images/60277c31ce5030f22d5df389083e8fe9.jpg",
+    maxAttendees: 10,
+    creator: {
+      name: "Nom",
+      firstName: 'prénom',
+      username: "pseudo"
+    },
+    isEnd: false,
+    startDate: new Date(),
+    endDate: new Date(),
+    coordinates: {
+      lat: 47.071076,
+      lng: -1.585813
+    },
+    address: null,
+    tags: ['football', 'basketball', 'rugby', 'patate', 'avion'],
+    EventType: "",
+    categ: "p",
+    participants:[{'username':'Participants 1','picture':'images/yellow-point.png'},{'username':'Participants 2','picture':'images/yellow-point.png'}],
+    commentary:[{'username':'Participants 1','picture':'images/yellow-point.png','comment':'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'},{'username':'participants 2','picture':'images/yellow-point.png','comment':'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'}],
+  },{
+    title: "Titre",
+    dateEvent: new Date(),
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    picture: "images/60277c31ce5030f22d5df389083e8fe9.jpg",
+    maxAttendees: 10,
+    creator: {
+      name: "Nom",
+      firstName: 'prénom',
+      username: "pseudo"
+    },
+    isEnd: false,
+    startDate: new Date(),
+    endDate: new Date(),
+    coordinates: {
+      lat:47.097487,
+      lng:-1.555399
+    },
+    address: null,
+    tags: ['football', 'basketball', 'rugby', 'patate', 'avion'],
+    EventType: "",
+    categ: "l",
     participants:[{'username':'Participants 1','picture':'images/yellow-point.png'},{'username':'Participants 2','picture':'images/yellow-point.png'}],
     commentary:[{'username':'Participants 1','picture':'images/yellow-point.png','comment':'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'},{'username':'participants 2','picture':'images/yellow-point.png','comment':'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'}],
   }
+]
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public mapProvider: MapProvider, public menuCtrl: MenuController,public modalCtrl: ModalController) {
 
