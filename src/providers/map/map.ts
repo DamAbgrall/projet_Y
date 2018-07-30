@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 import { GoogleMaps, GoogleMap, GoogleMapsEvent, Geocoder, LatLng, MarkerOptions, Marker, GoogleMapsAnimation, HtmlInfoWindow } from '@ionic-native/google-maps';
+import { Events } from 'ionic-angular';
 
 @Injectable()
 export class MapProvider {
     map: GoogleMap;
     mapDiv: HTMLElement;
     eventMarkerInfoList: Array<any> = [];
-    constructor(public googleMap: GoogleMaps) {
+    currentMaker: Marker;
+    constructor(public googleMap: GoogleMaps,public events: Events) {
 
     }
 
     loadMap(element: HTMLElement) {
-        console.log(element);
         this.mapDiv = element;
         return new Promise<{ element: HTMLElement, map: GoogleMap }>((resolve, reject) => {
             let mapOptions = {
@@ -33,8 +34,14 @@ export class MapProvider {
             this.map = GoogleMaps.create(this.mapDiv, mapOptions);
             this.map.one(GoogleMapsEvent.MAP_READY).then(() => {
                 this.map.setCameraZoom(14);
+                this.map.on(GoogleMapsEvent.MAP_LONG_CLICK).subscribe(coordiantes=>{
+                    console.log(coordiantes);
+                    this.latLngtoAddr(coordiantes[0].lat,coordiantes[0].lng).then(addr=>{
+                        console.log(addr);
+                        this.events.publish('MAP_LONG_CLICK', {address:addr,latLnt:coordiantes[0]});
+                    })
+                })
                 this.map.getMyLocation().then(res => {
-                    console.log(res)
                     this.map.setCameraTarget(res.latLng);
                 }).catch((err) => {
                     console.error(err);
@@ -112,7 +119,7 @@ export class MapProvider {
                     '<div style="font-size:12px">' + tagsHtml + '</div>',
                     '</div >',
                     '<div col-2>',
-                    '<button class="btn pds"><img src="images/three-dots-more-indicator.png"/></button>',
+                    '<button onclick="document.getElementById(\'ghetto\').click();" class="btn pds"><img src="images/three-dots-more-indicator.png"/></button>',
                     '<button class="btn plus"><img src="images/plus-symbol.png"/></button>',
                     '</div >',
                     '</div>',
@@ -122,13 +129,15 @@ export class MapProvider {
                     width: "190px",
                     height: "135px"
                 });
-                this.eventMarkerInfoList.concat({
+                this.eventMarkerInfoList=this.eventMarkerInfoList.concat([{
                     'event': event,
                     'marker': marker,
                     'infoWindow': infoWindow
-                })
+                }])
                 marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(res => {
+                    console.log(res[1])
                     infoWindow.open(marker);
+                    this.currentMaker = res[1]
                 })
             }).catch(err => {
                 console.error(err);

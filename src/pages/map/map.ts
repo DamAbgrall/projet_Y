@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { ModalController,NavController, NavParams, MenuController } from 'ionic-angular';
+import { ModalController,NavController, NavParams, MenuController,Events } from 'ionic-angular';
 import { MapProvider } from '../../providers/map/map';
 import { GoogleMap } from '@ionic-native/google-maps';
 import { NewEventPage } from '../new-event/new-event';
 import { EventListPage } from '../event-list/event-list';
 import { MyEventPage } from '../my-event/my-event';
+import { EventViewPage } from '../event-view/event-view';
 import { SettingsPage } from '../settings/settings';
 import { ModalFilterPage } from '../modal-filter/modal-filter';
 
@@ -25,7 +26,7 @@ export class MapPage {
   event=[{
     title: "Titre",
     dateEvent: new Date(),
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    description: "ABCDEFGHIJLKMNOPQRTSUVWXYZ",
     picture: "images/60277c31ce5030f22d5df389083e8fe9.jpg",
     maxAttendees: 10,
     creator: {
@@ -41,7 +42,7 @@ export class MapPage {
       lng: -1.567236
     },
     address: null,
-    tags: ['football', 'basketball', 'rugby', 'patate', 'avion'],
+    tags: ['football', 'rugby', 'patate', 'avion'],
     EventType: "",
     categ: "s",
     participants:[{'username':'Participants 1','picture':'images/yellow-point.png'},{'username':'Participants 2','picture':'images/yellow-point.png'}],
@@ -65,7 +66,7 @@ export class MapPage {
       lng: -1.576290
     },
     address: null,
-    tags: ['football', 'basketball', 'rugby', 'patate', 'avion'],
+    tags: ['football', 'basketball', 'rugby', 'avion'],
     EventType: "",
     categ: "e",
     participants:[{'username':'Participants 1','picture':'images/yellow-point.png'},{'username':'Participants 2','picture':'images/yellow-point.png'}],
@@ -89,7 +90,7 @@ export class MapPage {
       lng: -1.585813
     },
     address: null,
-    tags: ['football', 'basketball', 'rugby', 'patate', 'avion'],
+    tags: ['football', 'basketball', 'rugby', 'patate'],
     EventType: "",
     categ: "p",
     participants:[{'username':'Participants 1','picture':'images/yellow-point.png'},{'username':'Participants 2','picture':'images/yellow-point.png'}],
@@ -113,7 +114,7 @@ export class MapPage {
       lng:-1.555399
     },
     address: null,
-    tags: ['football', 'basketball', 'rugby', 'patate', 'avion'],
+    tags: ['basketball', 'rugby', 'patate', 'avion'],
     EventType: "",
     categ: "l",
     participants:[{'username':'Participants 1','picture':'images/yellow-point.png'},{'username':'Participants 2','picture':'images/yellow-point.png'}],
@@ -121,7 +122,7 @@ export class MapPage {
   }
 ]
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public mapProvider: MapProvider, public menuCtrl: MenuController,public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public mapProvider: MapProvider, public menuCtrl: MenuController,public modalCtrl: ModalController,public events: Events) {
 
   }
   ngAfterViewInit() {
@@ -129,6 +130,9 @@ export class MapPage {
     this.mapProvider.loadMap(this.element).then((mapData) => {
       this.map = mapData.map;
       this.mapProvider.addMarker(this.event);
+      this.events.subscribe('MAP_LONG_CLICK', (res) => {
+        this.navCtrl.push(NewEventPage,res);
+      });
     }).catch((err) => {
       console.error(err);
     })
@@ -155,5 +159,14 @@ export class MapPage {
       console.log(data);
     })
     modal.present();
+  }
+  openView(){
+    console.log(this.mapProvider.eventMarkerInfoList);
+    for(let element of this.mapProvider.eventMarkerInfoList){
+      console.log(this.mapProvider.currentMaker);
+      if(element.marker == this.mapProvider.currentMaker){
+        this.navCtrl.push(EventViewPage,{"event":element.event})
+      }
+    }
   }
 }

@@ -14,8 +14,8 @@
 
 
 <ion-content>
-  <img class="topimage" (click)="presentActionSheet()" [src]="lastImage"/>
-  <div class="padright"> 
+  <img class="topimage" (click)="presentActionSheet()" [src]="lastImage" />
+  <div class="padright">
     <ion-grid>
       <ion-row>
         <ion-col col-7>
@@ -32,7 +32,8 @@
       </ion-row>
     </ion-grid>
     <ion-item>
-      <ion-input placeholder="Titre" type="text" value=""></ion-input><!--TODO limiter à 17 caractètres-->
+      <ion-input placeholder="Titre" type="text" value=""></ion-input>
+      <!--TODO limiter à 17 caractètres-->
     </ion-item>
 
     <ion-item>
@@ -47,25 +48,25 @@
       <ion-textarea placeholder="Description" value=""></ion-textarea>
     </ion-item>
     <ion-item>
-      <ion-select placeholder="Catégorie">
+      <ion-select multiple="true" placeholder="Catégorie">
         <ion-option value="e">Evénement</ion-option>
         <ion-option value="s">Sortie</ion-option>
         <ion-option value="p">Plein air</ion-option>
         <ion-option value="l">Loisir</ion-option>
       </ion-select>
     </ion-item>
-    <div>
-      <div style="padding-left: 16px;">
-        <ion-chip *ngFor="let tag of TagList" >
-          <ion-label>{{tag}}</ion-label>
-          <button ion-button clear color="dark" (click)="delete(tag)">
-            <ion-icon name="close-circle"></ion-icon>
-          </button>
-        </ion-chip>
-        <button (click)="showTagModal()" style="float: right;background-color: #00c953;" ion-button round icon-only>
-          <ion-icon name="add"></ion-icon>
+    <div style="padding-left: 16px;margin: 10px 0px;">
+      <span style="font-size: 12px" *ngIf="TagList == null || TagList == undefined || TagList.length == 0">Pour ajouter des tags cliquez sur le plus</span>
+      <ion-chip *ngFor="let tag of TagList">
+        <ion-label>{{tag}}</ion-label>
+        <button ion-button clear color="dark" (click)="delete(tag)">
+          <ion-icon name="close-circle"></ion-icon>
         </button>
-      </div>
+      </ion-chip>
+      <button (click)="showTagModal()" class="add-tag-btn" ion-button
+        round icon-only>
+        <ion-icon name="add"></ion-icon>
+      </button>
     </div>
   </div>
   <div style="margin-left:16px;margin-right:20px;margin-bottom: 20px;">

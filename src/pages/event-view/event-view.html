@@ -15,7 +15,9 @@
 
 <ion-content class="scroll">
   <div *ngIf="event != null">
-    <div class="header-img"></div>
+    <div>
+      <img src="images/60277c31ce5030f22d5df389083e8fe9.png" />
+    </div>
     <ion-grid class="grid-absolute">
       <ion-row>
         <ion-col col-4>
@@ -23,17 +25,18 @@
         </ion-col>
         <ion-col col-8>
           <h2>{{event.title}}</h2>
-          <span>par {{event.creator.username}}</span>
+          <p style="margin: 0.3em 0;">par {{event.creator.username}}</p>
+          <span>
+            <span *ngIf="event.dateEvent.getDate()<10">0</span>{{event.dateEvent.getDate()}}/
+            <span *ngIf="event.dateEvent.getMonth()+1<10">0</span>{{event.dateEvent.getMonth()+1}}/{{event.dateEvent.getFullYear()}} à
+            <span *ngIf="event.dateEvent.getHours()<10">0</span>{{event.dateEvent.getHours()}}h
+            <span *ngIf="event.dateEvent.getMinutes()<10">0</span>{{event.dateEvent.getMinutes()}}
+          </span>
         </ion-col>
       </ion-row>
     </ion-grid>
-    <div [ngClass]="getColor(event.categ)" style="padding-top: 35px;" padding>
-      <p>
-        <span *ngIf="event.dateEvent.getDate()<10">0</span>{{event.dateEvent.getDate()}}/
-        <span *ngIf="event.dateEvent.getMonth()+1<10">0</span>{{event.dateEvent.getMonth()+1}}/{{event.dateEvent.getFullYear()}} à
-        <span *ngIf="event.dateEvent.getHours()<10">0</span>{{event.dateEvent.getHours()}}h
-        <span *ngIf="event.dateEvent.getMinutes()<10">0</span>{{event.dateEvent.getMinutes()}}
-      </p>
+    <div [ngClass]="getColor(event.categ)" style="padding-top: 50px;" padding>
+
       <div *ngIf="event.address != null">
         <p>
           <b>{{event.address[0].subThoroughfare}} {{event.address[0].thoroughfare}} {{event.address[0].postalCode}} {{event.address[0].locality}}
@@ -72,7 +75,7 @@
         <div *ngFor="let comments of event.commentary">
           <div class="comment-text">
             <div style="height: 0px;">
-                <img class="rond test" src="{{comments.picture}}">
+              <img class="rond test" src="{{comments.picture}}">
             </div>
             <p style="margin: 5px 0px;padding-left: 35px">{{comments.username}}</p>
             <small>{{comments.comment}}</small>

@@ -23,13 +23,13 @@ export class EventViewPage {
 
 
   getColor(categ) {
-    if (categ == "a") {
+    if (categ == "l") {
       return "jaune"
-    } else if (categ == "b") {
+    } else if (categ == "e") {
       return "violet";
-    } else if (categ == "c") {
+    } else if (categ == "p") {
       return "vert";
-    } else if (categ == "d") {
+    } else if (categ == "s") {
       return "rouge";
     } else {
       return "noir";

@@ -9,6 +9,8 @@ import { MapPage } from '../pages/map/map';
 import { ModalTagPage } from '../pages/modal-tag/modal-tag';
 import { EventListPage } from '../pages/event-list/event-list';
 import { SettingsPage } from '../pages/settings/settings';
+import { EventViewPage } from '../pages/event-view/event-view';
+
 
 @Component({
   templateUrl: 'app.html'

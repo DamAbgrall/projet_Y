@@ -23,7 +23,7 @@ export class NewEventPage {
     set: false,
   };
   TagList = []
-  lastImage = "images/60277c31ce5030f22d5df389083e8fe9.jpg";
+  lastImage = "images/60277c31ce5030f22d5df389083e8fe9.png";
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController,public actionSheetCtrl: ActionSheetController,public file: File,public crop: Crop,private camera: Camera) {
   }
   showModal() {

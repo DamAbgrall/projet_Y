@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams,ViewController,ModalController } from 'ionic-angular';
-import {modalGooglePlacesPage} from '../modalGooglePlaces/modalGooglePlaces';
-import {MapProvider} from '../../providers/map/map';
+import { NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
+import { modalGooglePlacesPage } from '../modalGooglePlaces/modalGooglePlaces';
+import { MapProvider } from '../../providers/map/map';
+import { ModalTagPage } from '../modal-tag/modal-tag';
 /**
  * Generated class for the ModalFilterPage page.
  *
@@ -15,42 +16,43 @@ import {MapProvider} from '../../providers/map/map';
 })
 export class ModalFilterPage {
 
-  a:boolean=false;
-  address ='';
-  coordinates=null;
+  a: boolean = false;
+  address = '';
+  coordinates = null;
+  TagList=[]
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl: ViewController,public modalCtrl: ModalController,public mapPro : MapProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController, public mapPro: MapProvider) {
   }
 
-  ionViewDidLoad(){
+  ionViewDidLoad() {
     let elem = document.getElementsByTagName("page-modal-filter").item(0);
     let parent = elem.parentElement
-    parent.addEventListener("click",()=>{
-      if(this.a){
+    parent.addEventListener("click", () => {
+      if (this.a) {
         this.a = false;
-      }else{
+      } else {
         this.viewCtrl.dismiss();
       }
     })
-    elem.addEventListener("click",()=>{
+    elem.addEventListener("click", () => {
       this.a = true
     })
   }
-  getCurrentPos(){
-    this.address=''
-    this.mapPro.map.getMyLocation().then(res=>{
+  getCurrentPos() {
+    this.address = ''
+    this.mapPro.map.getMyLocation().then(res => {
       console.log(res);
-      this.coordinates=res.latLng;
+      this.coordinates = res.latLng;
       this.address = '';
-    }).catch(err=>{
+    }).catch(err => {
       console.error(err);
     })
   }
-  cancel(){
+  cancel() {
     this.viewCtrl.dismiss();
   }
 
-  filter(){
+  filter() {
     this.viewCtrl.dismiss();
   }
   showModal() {
@@ -58,13 +60,21 @@ export class ModalFilterPage {
     this.address = '';
     // show modal|
     console.log('call showmodal');
-    let modal = this.modalCtrl.create(modalGooglePlacesPage,{type:"(cities)"});
+    let modal = this.modalCtrl.create(modalGooglePlacesPage, { type: "(cities)" });
     modal.onDidDismiss(data => {
       console.log('page > modal dismissed > data > ', data);
       if (data) {
         this.address = data.description;
-        this.coordinates=null
+        this.coordinates = null
       }
+    })
+    modal.present();
+  }
+  showTagModal() {
+    let modal = this.modalCtrl.create(ModalTagPage, { "tagList": this.TagList });
+    modal.onDidDismiss(data => {
+      this.TagList = data;
+      console.log(this.TagList);
     })
     modal.present();
   }
