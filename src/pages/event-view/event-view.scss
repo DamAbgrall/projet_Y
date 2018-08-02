@@ -22,6 +22,18 @@ page-event-view {
             background: linear-gradient(to top right, transparent 51%, rgba(0, 0, 0, 0.2) 52%);
         }
     }
+    .unsub-button {
+        height: 45px;
+        margin: 0px;
+        padding: 0px;
+        background-color: #E73437;
+        color: #000000;
+        span.button-inner {
+            font-size: 2rem;
+            text-transform: initial;
+            background: linear-gradient(to bottom left, transparent 51%, rgba(0, 0, 0, 0.2) 52%);
+        }
+    }
     ion-label {
         white-space: initial;
         text-align: justify;

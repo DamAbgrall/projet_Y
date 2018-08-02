@@ -1,11 +1,15 @@
 <ion-header>
 
     <ion-navbar>
-        <ion-title>eventView</ion-title>
+        <ion-title>eventList</ion-title>
     </ion-navbar>
 
 </ion-header>
 <ion-content>
+    <button ion-button [ngClass]="{'bg-gris':!evenement,'bc-bleu':evenement}" (click)="changeE()" class="top-btn">Evénement</button>
+    <button ion-button [ngClass]="{'bg-gris':!sortie,'bc-rouge':sortie}" (click)="changeS()" class="top-btn">Sortie</button>
+    <button ion-button [ngClass]="{'bg-gris':!pleinAir,'bc-vert':pleinAir}" (click)="changeP()" class="top-btn">Plein air</button>
+    <button ion-button [ngClass]="{'bg-gris':!loisir,'bc-jaune':loisir}" (click)="changeL()" class="top-btn">Loisir</button>
     <ion-card [ngClass]="getColor(event.categ)" *ngFor="let event of eventList">
         <div class="overlay">
             <div padding>

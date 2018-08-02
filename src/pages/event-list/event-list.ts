@@ -16,7 +16,7 @@ import { EventViewPage } from '../event-view/event-view';
 })
 export class EventListPage {
 
-  eventList = [{
+  firstTagList = [{
     title: "Titre",
     dateEvent: new Date(),
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -114,8 +114,15 @@ export class EventListPage {
     commentary:[{'username':'participants 1','picture':'images/yellow-point.png','comment':'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'},{'username':'participants 1','picture':'images/yellow-point.png','comment':'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'}],
   }];
 
+  evenement:boolean = true;
+  sortie:boolean = true;
+  pleinAir:boolean = true;
+  loisir:boolean = true;
+
+  eventList:any;
+  
   constructor(public navCtrl: NavController, public navParams: NavParams, public map: MapProvider) {
-    console.log(this.eventList[0].dateEvent);
+    this.eventList = this.firstTagList 
   }
   ionViewDidLoad() {
     for (let key in this.eventList) {
@@ -146,5 +153,46 @@ export class EventListPage {
   detail(event){
     this.navCtrl.push(EventViewPage,{"event":event})
   }
+
+
+  filter(){
+    var categList=[];
+    if(this.evenement){
+      categList=categList.concat("e");
+    }
+    if(this.sortie){
+      categList=categList.concat("s");
+    }
+    if(this.pleinAir){
+      categList=categList.concat("p");
+    }
+    if(this.loisir){
+      categList=categList.concat("l");
+    }
+    this.eventList=[];
+    for(let event of this.firstTagList){
+      if(categList.indexOf(event.categ)>=0){
+        this.eventList = this.eventList.concat(event)
+      }
+    }
+  }
+
+  changeE(){
+    this.evenement = !this.evenement;
+    this.filter();
+  }
+  changeS(){
+    this.sortie = !this.sortie;
+    this.filter();
+  }
+  changeP(){
+    this.pleinAir = !this.pleinAir;
+    this.filter();
+  }
+  changeL(){
+    this.loisir = !this.loisir;
+    this.filter();
+  }
+
 
 }

@@ -16,9 +16,16 @@ export class EventViewPage {
 
   event:any;
   menu="part";
+  isParticipant:boolean=true;
+  me:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.event = this.navParams.data.event;
+    for(let participant of this.event.participants){
+      if(this.me == participant){
+        this.isParticipant = true;
+      }
+    }
   }
 
 

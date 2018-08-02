@@ -49,7 +49,10 @@
         <i>#{{tag}}</i>
       </span>
     </div>
-    <button ion-button full class="sub-button medium">M'inscrire
+    <button *ngIf="!isParticipant" ion-button full class="sub-button medium">M'inscrire
+      <img class="logo-size" src="images/projet-y.png" />
+    </button>
+    <button *ngIf="isParticipant" ion-button full class="unsub-button medium">Me désinscrire
       <img class="logo-size" src="images/projet-y.png" />
     </button>
     <ion-segment [(ngModel)]="menu">
@@ -72,6 +75,13 @@
       </ion-list>
 
       <div *ngSwitchCase="'com'">
+        <div style="margin:0px 20px;">
+            <ion-item>
+                <ion-textarea placeholder="Commentaire ..."></ion-textarea>
+              </ion-item>
+              <button ion-button full class="sub-button">Envoyer</button>
+        </div>
+
         <div *ngFor="let comments of event.commentary">
           <div class="comment-text">
             <div style="height: 0px;">
