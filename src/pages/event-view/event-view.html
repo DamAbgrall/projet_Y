@@ -18,7 +18,7 @@
     <div>
       <img src="images/60277c31ce5030f22d5df389083e8fe9.png" />
     </div>
-    <ion-grid class="grid-absolute">
+    <ion-grid class="grid-absolute medium">
       <ion-row>
         <ion-col col-4>
           <img class="rond" src="images/yellow-point.png" />
@@ -38,25 +38,25 @@
     <div [ngClass]="getColor(event.categ)" style="padding-top: 50px;" padding>
 
       <div *ngIf="event.address != null">
-        <p>
+        <p class="medium">
           <b>{{event.address[0].subThoroughfare}} {{event.address[0].thoroughfare}} {{event.address[0].postalCode}} {{event.address[0].locality}}
             {{event.address[0].country}}
           </b>
         </p>
       </div>
-      <p class="desc">{{event.description}}</p>
-      <span class="card-size" *ngFor="let tag of event.tags">
+      <p class="desc light">{{event.description}}</p>
+      <span class="card-size medium" *ngFor="let tag of event.tags">
         <i>#{{tag}}</i>
       </span>
     </div>
-    <button ion-button full class="sub-button">M'inscrire
+    <button ion-button full class="sub-button medium">M'inscrire
       <img class="logo-size" src="images/projet-y.png" />
     </button>
     <ion-segment [(ngModel)]="menu">
-      <ion-segment-button value="part">
+      <ion-segment-button class="medium" value="part">
         Participants
       </ion-segment-button>
-      <ion-segment-button value="com">
+      <ion-segment-button class="medium" value="com">
         Commentaires
       </ion-segment-button>
     </ion-segment>
@@ -67,7 +67,7 @@
           <ion-thumbnail item-start>
             <img class="rond" src="{{user.picture}}">
           </ion-thumbnail>
-          <h2>{{user.username}}</h2>
+          <h2 class="medium">{{user.username}}</h2>
         </ion-item>
       </ion-list>
 
@@ -77,8 +77,8 @@
             <div style="height: 0px;">
               <img class="rond test" src="{{comments.picture}}">
             </div>
-            <p style="margin: 5px 0px;padding-left: 35px">{{comments.username}}</p>
-            <small>{{comments.comment}}</small>
+            <p class="medium" style="margin: 5px 0px;padding-left: 35px">{{comments.username}}</p>
+            <small class="light">{{comments.comment}}</small>
           </div>
         </div>
       </div>

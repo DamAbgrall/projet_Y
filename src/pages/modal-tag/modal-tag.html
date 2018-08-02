@@ -18,11 +18,11 @@
       <ion-input [(ngModel)]="search" placeholder="Recherche" (ngModelChange)="updateSearch()" clearInput="true"></ion-input>
     </ion-item>
   
-  <button style="width: 48%" (click)="finish()" ion-button>Ajouter</button>
-  <button style="width: 48%" (click)="dismiss()" ion-button>Annuler</button>
+  <button style="width: 48%" class="medium" (click)="finish()" ion-button>Ajouter</button>
+  <button style="width: 48%" class="medium" (click)="dismiss()" ion-button>Annuler</button>
   <ion-list>
     <ion-item *ngFor="let tag of viewList">
-      <ion-label>#{{tag}}</ion-label>
+      <ion-label class="medium">#{{tag}}</ion-label>
       <ion-checkbox [(ngModel)]="result[tag]"></ion-checkbox>
     </ion-item>
   </ion-list>

@@ -17,20 +17,20 @@
         <img style="border-radius:50%;" (click)="presentActionSheet()" src="images/yellow-point.png"/>
     </div>
     <div class="profil">
-        <span>Cliquez sur la photo pour la changer</span>
+        <span class="light">Cliquez sur la photo pour la changer</span>
     </div>
   <ion-grid>
     <ion-row>
       <ion-col>
         <div class="inline">
-          <h5>Loisir</h5>
+          <h5 class="medium">Loisir</h5>
           <ion-toggle [(ngModel)]="Loisir" class="orange toggle-right"></ion-toggle>
         </div>
         <button [disabled]="!Loisir" (click)="showLoisirTagModal()" class="plus-btn" ion-button>
           <ion-icon name="add"></ion-icon>
         </button>
         <ion-chip class="chip-orange" *ngFor="let tag of LoisirTagList">
-          <ion-label>{{tag}}</ion-label>
+          <ion-label class="medium">{{tag}}</ion-label>
           <button [disabled]="!Loisir" ion-button clear color="dark" (click)="delete(tag,LoisirTagList)">
             <ion-icon name="close-circle"></ion-icon>
           </button>
@@ -40,14 +40,14 @@
     <ion-row>
       <ion-col>
         <div class="inline">
-          <h5>Plein air</h5>
+          <h5 class="medium">Plein air</h5>
           <ion-toggle [(ngModel)]="PleinAir" class="vert toggle-right"></ion-toggle>
         </div>
         <button [disabled]="!PleinAir" (click)="showPleinAirTagModal()" class="plus-btn" ion-button>
           <ion-icon name="add"></ion-icon>
         </button>
         <ion-chip class="chip-vert" *ngFor="let tag of PleinAirTagList">
-          <ion-label>{{tag}}</ion-label>
+          <ion-label class="medium">{{tag}}</ion-label>
           <button [disabled]="!PleinAir" ion-button clear color="dark" (click)="delete(tag,PleinAirTagList)">
             <ion-icon name="close-circle"></ion-icon>
           </button>
@@ -57,14 +57,14 @@
     <ion-row>
       <ion-col>
         <div class="inline">
-          <h5>Sortie</h5>
+          <h5 class="medium">Sortie</h5>
           <ion-toggle [(ngModel)]="Sortie" class="violet toggle-right"></ion-toggle>
         </div>
         <button [disabled]="!Sortie" (click)="showSortieTagModal()" class="plus-btn" ion-button>
           <ion-icon name="add"></ion-icon>
         </button>
         <ion-chip class="chip-violet" *ngFor="let tag of SortieTagList">
-          <ion-label>{{tag}}</ion-label>
+          <ion-label class="medium">{{tag}}</ion-label>
           <button [disabled]="!Sortie" ion-button clear color="dark" (click)="delete(tag,SortieTagList)">
             <ion-icon name="close-circle"></ion-icon>
           </button>
@@ -74,14 +74,14 @@
     <ion-row>
       <ion-col>
         <div class="inline">
-          <h5>Evenement</h5>
+          <h5 class="medium">Evenement</h5>
           <ion-toggle [(ngModel)]="Evenement" class="rouge toggle-right"></ion-toggle>
         </div>
         <button [disabled]="!Evenement" (click)="showEvenementTagModal()" class="plus-btn" ion-button>
           <ion-icon name="add"></ion-icon>
         </button>
         <ion-chip class="chip-rouge" *ngFor="let tag of EvenementTagList">
-          <ion-label>{{tag}}</ion-label>
+          <ion-label class="medium">{{tag}}</ion-label>
           <button [disabled]="!Evenement" ion-button clear color="dark" (click)="delete(tag,EvenementTagList)">
             <ion-icon name="close-circle"></ion-icon>
           </button>

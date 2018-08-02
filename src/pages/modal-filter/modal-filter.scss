@@ -24,13 +24,19 @@ page-modal-filter {
     .button-md{
         padding: 1px 6px;
     }
+    .add-tag-btn{
+        float: right;
+        background-color: #00c953;
+        height: 3.6rem;
+        width: 3.6rem;
+    }
 }
 
 page-modal-filter.ion-page {
     width: 90%;
-    height: 82%;
+    height: 85%;
     left:5%;
-    top:9%;
+    top:7.5%;
   }
 ion-app.md [padding] .scroll-content {
     padding: 10px;

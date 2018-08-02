@@ -12,7 +12,7 @@
   </ion-searchbar>
   <ion-list>
     <ion-item *ngFor="let item of autocompleteItems"
-              (click)="chooseItem(item)">
+              (click)="chooseItem(item)" class="medium">
       {{ item.description }}
     </ion-item>
   </ion-list>
