@@ -6,9 +6,9 @@ import { Events } from 'ionic-angular';
 export class MapProvider {
     map: GoogleMap;
     mapDiv: HTMLElement;
-    eventMarkerInfoList: Array<any> = [];
+    eventMarkerInfoList: Array<{event:any,marker:Marker,infoWindow:HtmlInfoWindow}> = [];
     currentMaker: Marker;
-    constructor(public googleMap: GoogleMaps,public events: Events) {
+    constructor(public googleMap: GoogleMaps, public events: Events) {
 
     }
 
@@ -34,11 +34,11 @@ export class MapProvider {
             this.map = GoogleMaps.create(this.mapDiv, mapOptions);
             this.map.one(GoogleMapsEvent.MAP_READY).then(() => {
                 this.map.setCameraZoom(14);
-                this.map.on(GoogleMapsEvent.MAP_LONG_CLICK).subscribe(coordiantes=>{
+                this.map.on(GoogleMapsEvent.MAP_LONG_CLICK).subscribe(coordiantes => {
                     console.log(coordiantes);
-                    this.latLngtoAddr(coordiantes[0].lat,coordiantes[0].lng).then(addr=>{
+                    this.latLngtoAddr(coordiantes[0].lat, coordiantes[0].lng).then(addr => {
                         console.log(addr);
-                        this.events.publish('MAP_LONG_CLICK', {address:addr,latLnt:coordiantes[0]});
+                        this.events.publish('MAP_LONG_CLICK', { address: addr, latLnt: coordiantes[0] });
                     })
                 })
                 this.map.getMyLocation().then(res => {
@@ -71,6 +71,39 @@ export class MapProvider {
             })
         })
     }
+    addrtoLatLng(addr){
+        return new Promise<any>((resolve, reject) => {
+            var request = {
+                'address': addr
+            };
+            console.log(request);
+            Geocoder.geocode(request).then(res => {
+                resolve(res);
+                console.log(res);
+            }).catch(err => {
+                console.error(err);
+                reject(err);
+            })
+        })
+    }
+
+    distance(lat1, lng1, lat2, lng2) {
+        var R = 6371; // Radius of the earth in km
+        var dLat = this.deg2rad(lat2 - lat1);  // deg2rad below
+        var dLon = this.deg2rad(lng2 - lng1);
+        var a =
+            Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2)
+            ;
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        var d = R * c; // Distance in km
+        return d;
+    }
+    deg2rad(deg) {
+        return deg * (Math.PI / 180)
+    }
+
     addMarker(events: Array<any>) {
         for (let event of events) {
             let options: MarkerOptions = {
@@ -129,7 +162,7 @@ export class MapProvider {
                     width: "190px",
                     height: "135px"
                 });
-                this.eventMarkerInfoList=this.eventMarkerInfoList.concat([{
+                this.eventMarkerInfoList = this.eventMarkerInfoList.concat([{
                     'event': event,
                     'marker': marker,
                     'infoWindow': infoWindow

@@ -19,7 +19,11 @@ export class ModalFilterPage {
   a: boolean = false;
   address = '';
   coordinates = null;
-  TagList=[]
+  TagList = []
+  debut;
+  fin;
+  distance;
+  categ;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController, public mapPro: MapProvider) {
   }
@@ -53,7 +57,15 @@ export class ModalFilterPage {
   }
 
   filter() {
-    this.viewCtrl.dismiss();
+    let data = {
+      "debut": this.debut,
+      "fin": this.fin,
+      "coordinates": this.coordinates,
+      "distance": this.distance,
+      "categ": this.categ,
+      "TagList": this.TagList
+    }
+    this.viewCtrl.dismiss(data);
   }
   showModal() {
     // reset 
@@ -64,7 +76,13 @@ export class ModalFilterPage {
     modal.onDidDismiss(data => {
       console.log('page > modal dismissed > data > ', data);
       if (data) {
-        this.address = data.description;
+        this.mapPro.addrtoLatLng(data.description).then(res => {
+          console.log(res);
+          this.coordinates = res;
+        }).catch(err=>{
+          console.error(err)
+        })
+
         this.coordinates = null
       }
     })

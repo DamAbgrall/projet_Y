@@ -15,12 +15,17 @@ import {RequestProvider } from '../../providers/request/request';
 })
 export class LoginPage {
 
+  clicked :boolean = false;
+
   constructor(public navCtrl: NavController,public googlePlus: GooglePlus,public fb: Facebook,public twitter: TwitterConnect,public http: HttpClient,public socketProvider:SocketProvider,public request :RequestProvider ) {
   }
 
   skip(){
     console.log("test")
-    this.navCtrl.setRoot(MapPage);
+    if(this.clicked == false){
+      this.navCtrl.setRoot(MapPage);
+    }
+    this.clicked = true;
   }
 
   GGLogin(){

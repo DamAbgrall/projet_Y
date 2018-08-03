@@ -15,10 +15,10 @@
 
 <ion-content padding>
   <ion-item>
-    <ion-datetime placeholder="Date de début" displayFormat="YYYY-MM-DD HH:mm" cancelText="Annuler" doneText="Valider"></ion-datetime>
+    <ion-datetime placeholder="Date de début" displayFormat="YYYY-MM-DD HH:mm" cancelText="Annuler" doneText="Valider" [(ngModel)]="debut"></ion-datetime>
   </ion-item>
   <ion-item>
-    <ion-datetime placeholder="Date de fin" displayFormat="YYYY-MM-DD HH:mm" cancelText="Annuler" doneText="Valider"></ion-datetime>
+    <ion-datetime placeholder="Date de fin" displayFormat="YYYY-MM-DD HH:mm" cancelText="Annuler" doneText="Valider" [(ngModel)]="fin"></ion-datetime>
   </ion-item>
   <div style="display:-webkit-box">
     <button ion-button (click)="getCurrentPos()" class="my-loc-btn">
@@ -32,10 +32,10 @@
     </ion-item>
   </div>
   <ion-item>
-    <ion-input placeholder="Distance en km" type="number"></ion-input>
+    <ion-input placeholder="Distance en km" type="number" [(ngModel)]="distance"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-select placeholder="Catégorie">
+    <ion-select multiple="true" placeholder="Catégorie" [(ngModel)]="categ">
       <ion-option value="e">Evénement</ion-option>
       <ion-option value="s">Sortie</ion-option>
       <ion-option value="p">Plein air</ion-option>

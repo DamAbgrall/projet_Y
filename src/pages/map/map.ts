@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalController,NavController, NavParams, MenuController,Events } from 'ionic-angular';
+import { ModalController, NavController, NavParams, MenuController, Events } from 'ionic-angular';
 import { MapProvider } from '../../providers/map/map';
 import { GoogleMap } from '@ionic-native/google-maps';
 import { NewEventPage } from '../new-event/new-event';
@@ -21,9 +21,9 @@ export class MapPage {
     'param': SettingsPage,
     'comingEvents': MyEventPage,
     'newEvent': NewEventPage,
-    'EventListPage':EventListPage
+    'EventListPage': EventListPage
   }
-  event=[{
+  event = [{
     title: "Titre",
     dateEvent: new Date(),
     description: "ABCDEFGHIJLKMNOPQRTSUVWXYZ",
@@ -37,17 +37,14 @@ export class MapPage {
     isEnd: false,
     startDate: new Date(),
     endDate: new Date(),
-    coordinates: {
-      lat: 47.071482,
-      lng: -1.567236
-    },
+    coordinates: { lat: 0, lng: 0 },
     address: null,
     tags: ['football', 'rugby', 'patate', 'avion'],
     EventType: "",
     categ: "s",
-    participants:[{'username':'Participants 1','picture':'images/yellow-point.png'},{'username':'Participants 2','picture':'images/yellow-point.png'}],
-    commentary:[{'username':'Participants 1','picture':'images/yellow-point.png','comment':'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'},{'username':'participants 2','picture':'images/yellow-point.png','comment':'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'}],
-  },{
+    participants: [{ 'username': 'Participants 1', 'picture': 'images/yellow-point.png' }, { 'username': 'Participants 2', 'picture': 'images/yellow-point.png' }],
+    commentary: [{ 'username': 'Participants 1', 'picture': 'images/yellow-point.png', 'comment': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' }, { 'username': 'participants 2', 'picture': 'images/yellow-point.png', 'comment': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' }],
+  }, {
     title: "Titre",
     dateEvent: new Date(),
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -61,17 +58,14 @@ export class MapPage {
     isEnd: false,
     startDate: new Date(),
     endDate: new Date(),
-    coordinates: {
-      lat: 47.078611,
-      lng: -1.576290
-    },
+    coordinates: { lat: 47.078611, lng: -1.576290 },
     address: null,
     tags: ['football', 'basketball', 'rugby', 'avion'],
     EventType: "",
     categ: "e",
-    participants:[{'username':'Participants 1','picture':'images/yellow-point.png'},{'username':'Participants 2','picture':'images/yellow-point.png'}],
-    commentary:[{'username':'Participants 1','picture':'images/yellow-point.png','comment':'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'},{'username':'participants 2','picture':'images/yellow-point.png','comment':'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'}],
-  },{
+    participants: [{ 'username': 'Participants 1', 'picture': 'images/yellow-point.png' }, { 'username': 'Participants 2', 'picture': 'images/yellow-point.png' }],
+    commentary: [{ 'username': 'Participants 1', 'picture': 'images/yellow-point.png', 'comment': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' }, { 'username': 'participants 2', 'picture': 'images/yellow-point.png', 'comment': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' }],
+  }, {
     title: "Titre",
     dateEvent: new Date(),
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -85,17 +79,14 @@ export class MapPage {
     isEnd: false,
     startDate: new Date(),
     endDate: new Date(),
-    coordinates: {
-      lat: 47.071076,
-      lng: -1.585813
-    },
+    coordinates: { lat: 47.071076, lng: -1.585813 },
     address: null,
     tags: ['football', 'basketball', 'rugby', 'patate'],
     EventType: "",
     categ: "p",
-    participants:[{'username':'Participants 1','picture':'images/yellow-point.png'},{'username':'Participants 2','picture':'images/yellow-point.png'}],
-    commentary:[{'username':'Participants 1','picture':'images/yellow-point.png','comment':'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'},{'username':'participants 2','picture':'images/yellow-point.png','comment':'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'}],
-  },{
+    participants: [{ 'username': 'Participants 1', 'picture': 'images/yellow-point.png' }, { 'username': 'Participants 2', 'picture': 'images/yellow-point.png' }],
+    commentary: [{ 'username': 'Participants 1', 'picture': 'images/yellow-point.png', 'comment': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' }, { 'username': 'participants 2', 'picture': 'images/yellow-point.png', 'comment': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' }],
+  }, {
     title: "Titre",
     dateEvent: new Date(),
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -109,21 +100,17 @@ export class MapPage {
     isEnd: false,
     startDate: new Date(),
     endDate: new Date(),
-    coordinates: {
-      lat:47.097487,
-      lng:-1.555399
-    },
+    coordinates: { lat: 47.097487, lng: -1.555399 },
     address: null,
     tags: ['basketball', 'rugby', 'patate', 'avion'],
     EventType: "",
     categ: "l",
-    participants:[{'username':'Participants 1','picture':'images/yellow-point.png'},{'username':'Participants 2','picture':'images/yellow-point.png'}],
-    commentary:[{'username':'Participants 1','picture':'images/yellow-point.png','comment':'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'},{'username':'participants 2','picture':'images/yellow-point.png','comment':'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'}],
+    participants: [{ 'username': 'Participants 1', 'picture': 'images/yellow-point.png' }, { 'username': 'Participants 2', 'picture': 'images/yellow-point.png' }],
+    commentary: [{ 'username': 'Participants 1', 'picture': 'images/yellow-point.png', 'comment': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' }, { 'username': 'participants 2', 'picture': 'images/yellow-point.png', 'comment': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' }],
   }
-]
+  ]
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public mapProvider: MapProvider, public menuCtrl: MenuController,public modalCtrl: ModalController,public events: Events) {
-
+  constructor(public navCtrl: NavController, public navParams: NavParams, public mapProvider: MapProvider, public menuCtrl: MenuController, public modalCtrl: ModalController, public events: Events) {
   }
   ngAfterViewInit() {
     this.element = document.getElementById('map');
@@ -131,7 +118,7 @@ export class MapPage {
       this.map = mapData.map;
       this.mapProvider.addMarker(this.event);
       this.events.subscribe('MAP_LONG_CLICK', (res) => {
-        this.navCtrl.push(NewEventPage,res);
+        this.navCtrl.push(NewEventPage, res);
       });
     }).catch((err) => {
       console.error(err);
@@ -153,20 +140,47 @@ export class MapPage {
     this.navCtrl.push(this.viewList[viewName]);
   }
 
-  openFilter(){
+  openFilter() {
     let modal = this.modalCtrl.create(ModalFilterPage);
     modal.onDidDismiss(data => {
       console.log(data);
+      if (data != undefined) {
+        var correcTime = true;
+        var correctDistance = true;
+        var correcCateg = true;
+        var correcTag = true;
+        for (let elem of this.mapProvider.eventMarkerInfoList) {
+          elem.marker.setVisible(false);
+          if (data.debut != undefined && data.fin != undefined) {
+            correcTime = elem.event.dateEvent > data.debut && elem.event.dateEvent < data.fin;
+          }
+          if (data.coordinates != "" && data.coordinates != undefined) {
+            if (data.coordinates.lat != "" && data.coordinates.lng != "") {
+              correctDistance = this.mapProvider.distance(elem.event.coordinates.lat, elem.event.coordinates.lng, data.coordinates.lat, data.coordinates.lng) < data.distance;
+            }
+          }
+          if (data.categ != undefined) {
+            correcCateg = data.categ.indexOf(elem.event.categ) >= 0;
+          }
+          if (data.TagList.length > 0) {
+            correcTag = data.TagList.some(r => elem.event.tags.indexOf(r) >= 0);
+          }
+          if (correcTime && correctDistance && correcCateg && correcTag) {
+            elem.marker.setVisible(true);
+          }
+        }
+      }
     })
     modal.present();
   }
-  openView(){
+  openView() {
     console.log(this.mapProvider.eventMarkerInfoList);
-    for(let element of this.mapProvider.eventMarkerInfoList){
+    for (let element of this.mapProvider.eventMarkerInfoList) {
       console.log(this.mapProvider.currentMaker);
-      if(element.marker == this.mapProvider.currentMaker){
-        this.navCtrl.push(EventViewPage,{"event":element.event})
+      if (element.marker == this.mapProvider.currentMaker) {
+        this.navCtrl.push(EventViewPage, { "event": element.event })
       }
     }
   }
+
 }
