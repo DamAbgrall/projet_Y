@@ -35,7 +35,6 @@ export class LoginPage {
     this.googlePlus.login(params).then(res => {
       console.log(res)
       this.request.login(res.givenName,res.familyName,"",res.email,res.userId,"Google").then(res=>{
-        console.log(res);
         this.socketProvider.socketLogin(res._id);
         this.navCtrl.setRoot(MapPage);
       }).catch(err=>{

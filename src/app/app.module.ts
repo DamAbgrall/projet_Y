@@ -1,12 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { ErrorHandler, NgModule, Injectable } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { Facebook } from '@ionic-native/facebook';
 import { TwitterConnect } from '@ionic-native/twitter-connect';
-import { GoogleMaps,Geocoder} from '@ionic-native/google-maps';
+import { GoogleMaps, Geocoder } from '@ionic-native/google-maps';
 import { HttpClientModule } from '@angular/common/http';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { Camera } from '@ionic-native/camera';
@@ -28,6 +28,7 @@ import { MapProvider } from '../providers/map/map';
 import { SocketProvider } from '../providers/socket/socket';
 import { RequestProvider } from '../providers/request/request';
 
+import { Socket } from 'ng-socket-io';
 @NgModule({
   declarations: [
     MyApp,
@@ -45,7 +46,7 @@ import { RequestProvider } from '../providers/request/request';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpClientModule
+    HttpClientModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -73,10 +74,10 @@ import { RequestProvider } from '../providers/request/request';
     Camera,
     Crop,
     File,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     MapProvider,
     SocketProvider,
     RequestProvider
   ]
 })
-export class AppModule {}
+export class AppModule { }
