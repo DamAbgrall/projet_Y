@@ -1,5 +1,6 @@
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 
 /*
   Generated class for the RequestProvider provider.
@@ -11,9 +12,10 @@ import { Injectable } from '@angular/core';
 export class RequestProvider {
 
   header: HttpHeaders;
-  serverAddr : string = "http://192.168.1.57:3000/"
+  serverAddr : string = "http://172.16.2.205:3000/"
+  userId : string;
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient,public transfer : FileTransfer) {
     this.header = new HttpHeaders();
     this.header = this.header.append("Accept", "application/json");
   }
@@ -30,10 +32,11 @@ export class RequestProvider {
         name:name
       }
       this.http.post(this.serverAddr+"auth",option).subscribe((res)=>{
-        this.header = this.header.append("Authorization", "Bearer " + res["token"]);
+        this.header = this.header.append("Authorization", res["token"]);
+        this.userId = res["_id"];
         console.log(res)
         if (res){
-          resolve(res);
+          resolve(res["success"] == true);
         }else{
           reject(res);
         } 
@@ -43,10 +46,10 @@ export class RequestProvider {
 
   create(model,data){
     return new Promise<any>((resolve, reject) => {
-      this.http.post(this.serverAddr+"/"+model,data,{ headers: this.header }).subscribe((res)=>{
+      this.http.post(this.serverAddr+model,data,{ headers: this.header }).subscribe((res)=>{
         console.log(res)
         if (res){
-          resolve(res);
+          resolve(res["success"] == true);
         }else{
           reject(res);
         } 
@@ -56,10 +59,10 @@ export class RequestProvider {
 
   delete(model,data){
     return new Promise<any>((resolve, reject) => {
-      this.http.delete(this.serverAddr+"/"+model+"/"+data,{ headers: this.header }).subscribe((res)=>{
+      this.http.delete(this.serverAddr+model+"/"+data,{ headers: this.header }).subscribe((res)=>{
         console.log(res)
         if (res){
-          resolve(res);
+          resolve(res["success"] == true);
         }else{
           reject(res);
         } 
@@ -69,7 +72,7 @@ export class RequestProvider {
 
   getAll(model){
     return new Promise<any>((resolve, reject) => {
-      this.http.get(this.serverAddr+"/"+model,{ headers: this.header }).subscribe((res)=>{
+      this.http.get(this.serverAddr+model,{ headers: this.header }).subscribe((res)=>{
         console.log(res)
         if (res){
           resolve(res);
@@ -82,7 +85,7 @@ export class RequestProvider {
 
   getOne(model,id){
     return new Promise<any>((resolve, reject) => {
-      this.http.get(this.serverAddr+"/"+model+"/"+id,{ headers: this.header }).subscribe((res)=>{
+      this.http.get(this.serverAddr+model+"/"+id,{ headers: this.header }).subscribe((res)=>{
         console.log(res)
         if (res){
           resolve(res);
@@ -95,13 +98,37 @@ export class RequestProvider {
 
   update(model,data,id){
     return new Promise<any>((resolve, reject) => {
-      this.http.put(this.serverAddr+"/"+model+"/"+id,data,{ headers: this.header }).subscribe((res)=>{
+      this.http.put(this.serverAddr+model+"/"+id,data,{ headers: this.header }).subscribe((res)=>{
         console.log(res)
         if (res){
-          resolve(res);
+          resolve(res["success"] == true);
         }else{
           reject(res);
         } 
+      })
+    })
+  }
+
+  updateImage(picturePath) {
+    return new Promise<any>((resolve, reject) => {
+      var url = this.serverAddr + "users/image/"+this.userId;
+
+      var uploadoptions: FileUploadOptions = {
+        fileKey: "avatar",
+        fileName: "image.jpg",
+        chunkedMode: true,
+        mimeType: "image/jpg",
+        headers: this.header,
+      };
+      console.log(uploadoptions);
+      var fileTransfer: FileTransferObject = this.transfer.create();
+      fileTransfer.upload(picturePath, url, uploadoptions, true).then(res => {
+        console.log("request result : ");
+        console.log(res);
+        resolve(res);
+      }).catch(err => {
+        console.error(err);
+        reject(err);
       })
     })
   }

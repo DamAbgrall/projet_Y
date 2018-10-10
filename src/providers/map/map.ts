@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { GoogleMaps, GoogleMap, GoogleMapsEvent, Geocoder, LatLng, MarkerOptions, Marker, GoogleMapsAnimation, HtmlInfoWindow } from '@ionic-native/google-maps';
 import { Events } from 'ionic-angular';
+import { RequestProvider } from '../request/request';
 
 @Injectable()
 export class MapProvider {
@@ -8,9 +9,8 @@ export class MapProvider {
     mapDiv: HTMLElement;
     eventMarkerInfoList: Array<{event:any,marker:Marker,infoWindow:HtmlInfoWindow}> = [];
     currentMaker: Marker;
-    constructor(public googleMap: GoogleMaps, public events: Events) {
-
-    }
+    
+    constructor(public googleMap: GoogleMaps, public events: Events,public request : RequestProvider) {}
 
     loadMap(element: HTMLElement) {
         this.mapDiv = element;
@@ -78,8 +78,8 @@ export class MapProvider {
             };
             console.log(request);
             Geocoder.geocode(request).then(res => {
-                resolve(res);
                 console.log(res);
+                resolve(res);
             }).catch(err => {
                 console.error(err);
                 reject(err);
@@ -105,16 +105,18 @@ export class MapProvider {
     }
 
     addMarker(events: Array<any>) {
-        for (let event of events) {
+        for (let eventTag of events) {
+            eventTag.event.endDate = new Date(eventTag.event.endDate)
+            eventTag.event.startDate = new Date(eventTag.event.startDate)
             let options: MarkerOptions = {
                 icon: {
-                    url: 'images/' + event.categ + '.png',
+                    url: 'images/' + eventTag.event.category.name + '.png',
                     size: {
                         width: 32,
                         height: 32
                     }
                 },
-                position: { lat: event.coordinates.lat, lng: event.coordinates.lng },
+                position: { lat: eventTag.event.coordinates.lat, lng: eventTag.event.coordinates.lng },
                 visible: true,
                 animation: GoogleMapsAnimation.DROP,
             };
@@ -122,32 +124,35 @@ export class MapProvider {
                 let infoWindow = new HtmlInfoWindow();
                 let frame: HTMLElement = document.createElement('div');
                 var tagsHtml = ""
-                for (let tag of event.tags) {
-                    tagsHtml = tagsHtml + "<span><i>#" + tag + "  </i></span>"
+                console.log(eventTag.tags)
+                for (let tag of eventTag.tags) {
+                    console.log(tag)
+                    tagsHtml = tagsHtml + "<span><i>#" + tag.tag.tagName + "  </i></span>"
                 }
-                var dateZero = ""
-                var monthZero = ""
-                var hourZero = ""
-                var minuteZero = ""
-                if (event.dateEvent.getDate() < 10) {
-                    dateZero = "0";
-                }
-                if (event.dateEvent.getMonth() < 10) {
-                    monthZero = "0";
-                }
-                if (event.dateEvent.getHours() < 10) {
-                    hourZero = "0";
-                }
-                if (event.dateEvent.getMinutes() < 10) {
-                    minuteZero = "0";
-                }
+                var endDateZero = ""
+                var endMonthZero = ""
+                var endHourZero = ""
+                var endMinuteZero = ""
+                var startDateZero = ""
+                var startMonthZero = ""
+                var startHourZero = ""
+                var startMinuteZero = ""
+                if (eventTag.event.endDate.getDate() < 10)endDateZero = "0";
+                if (eventTag.event.endDate.getMonth() < 10) endMonthZero = "0";
+                if (eventTag.event.endDate.getHours() < 10) endHourZero = "0";
+                if (eventTag.event.endDate.getMinutes() < 10) endMinuteZero = "0";
+                if (eventTag.event.startDate.getDate() < 10)startDateZero = "0";
+                if (eventTag.event.startDate.getMonth() < 10) startMonthZero = "0";
+                if (eventTag.event.startDate.getHours() < 10) startHourZero = "0";
+                if (eventTag.event.startDate.getMinutes() < 10) startMinuteZero = "0";
                 frame.innerHTML = [
                     '<div class="container">',
                     '<div class="row">',
                     '<div col-10>',
-                    '<h6 class="info-window-text">' + event.title + '</h6>',
-                    '<p style="font-size:12px" class="info-window-text">' + dateZero + event.dateEvent.getDate() + '/' + monthZero + event.dateEvent.getMonth() + '/' + event.dateEvent.getFullYear() + ' à ' + hourZero + event.dateEvent.getHours() + 'h' + minuteZero + event.dateEvent.getMinutes() + '</p>',
-                    '<p style="font-size:12px" class="desc info-window-text">' + event.description + '</p>',
+                    '<h7 class="info-window-text">' + eventTag.event.title + '</h7>',
+                    '<p style="font-size:12px" class="info-window-text">' + startDateZero + eventTag.event.startDate.getDate() + '/' + startMonthZero + eventTag.event.startDate.getMonth() + '/' + eventTag.event.startDate.getFullYear() + ' à ' + startHourZero + eventTag.event.startDate.getHours() + 'h' + startMinuteZero + eventTag.event.startDate.getMinutes() + '</p>',
+                    '<p style="font-size:12px" class="info-window-text">' + endDateZero + eventTag.event.endDate.getDate() + '/' + endMonthZero + eventTag.event.endDate.getMonth() + '/' + eventTag.event.endDate.getFullYear() + ' à ' + endHourZero + eventTag.event.endDate.getHours() + 'h' + endMinuteZero + eventTag.event.endDate.getMinutes() + '</p>',
+                    '<p style="font-size:12px" class="desc info-window-text">' + eventTag.event.description + '</p>',
                     '<hr style="margin: 2px 0px;">',
                     '<div style="font-size:12px">' + tagsHtml + '</div>',
                     '</div >',
@@ -171,11 +176,10 @@ export class MapProvider {
                     console.log(res[1])
                     infoWindow.open(marker);
                     this.currentMaker = res[1]
-                })
+                });
             }).catch(err => {
                 console.error(err);
             })
-
         }
     }
 

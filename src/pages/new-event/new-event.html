@@ -21,44 +21,52 @@
         <ion-col col-7>
           <ion-item>
             <ion-label>Inscription</ion-label>
-            <ion-toggle checked="false"></ion-toggle>
+            <ion-toggle checked="false" [(ngModel)]="inscription"></ion-toggle>
           </ion-item>
         </ion-col>
         <ion-col col-5>
           <ion-item>
-            <ion-input placeholder="Participants" type="text" value=""></ion-input>
+            <ion-input placeholder="Participants" type="number" [(ngModel)]="attendees"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
     </ion-grid>
     <ion-item>
-      <ion-input placeholder="Titre" type="text" value=""></ion-input>
+      <ion-input placeholder="Titre" type="text" [(ngModel)]="title"></ion-input>
       <!--TODO limiter à 17 caractètres-->
     </ion-item>
 
     <ion-item>
-      <ion-datetime placeholder="Date" displayFormat="YYYY-MM-DD HH:mm" cancelText="Annuler" doneText="Valider"></ion-datetime>
+      <ion-datetime placeholder="Date de début" displayFormat="YYYY-MM-DD HH:mm" cancelText="Annuler" doneText="Valider" [(ngModel)]="startDate"></ion-datetime>
     </ion-item>
 
     <ion-item>
-      <ion-input placeholder="Adresse" (click)="showModal()" [(ngModel)]="address.place"></ion-input>
+      <ion-datetime placeholder="Date de fin" displayFormat="YYYY-MM-DD HH:mm" cancelText="Annuler" doneText="Valider" [(ngModel)]="endDate"></ion-datetime>
     </ion-item>
 
     <ion-item>
-      <ion-textarea placeholder="Description" value=""></ion-textarea>
+      <ion-input placeholder="Adresse" (ionChange)="updateSearch()" (ionFocus)="showItems()" [(ngModel)]="autocomplete.description"></ion-input>
+    </ion-item>
+    <div class="divAutoComp" id="divAutoComp">
+      <ion-list>
+        <ion-item *ngFor="let item of autocompleteItems" (click)="choose(item)" class="medium">
+          {{ item.description }}
+        </ion-item>
+      </ion-list>
+    </div>
+    
+    <ion-item>
+      <ion-textarea placeholder="Description" [(ngModel)]="description"></ion-textarea>
     </ion-item>
     <ion-item>
-      <ion-select multiple="true" placeholder="Catégorie">
-        <ion-option value="e">Evénement</ion-option>
-        <ion-option value="s">Sortie</ion-option>
-        <ion-option value="p">Plein air</ion-option>
-        <ion-option value="l">Loisir</ion-option>
+      <ion-select placeholder="Catégorie" [(ngModel)]="selectedCategory"> 
+        <ion-option *ngFor="let category of categories" [value]="category._id">{{category.name}}</ion-option>
       </ion-select>
     </ion-item>
     <div style="padding-left: 16px;margin: 10px 0px;">
       <span style="font-size: 12px" *ngIf="TagList == null || TagList == undefined || TagList.length == 0">Pour ajouter des tags cliquez sur le plus</span>
       <ion-chip *ngFor="let tag of TagList">
-        <ion-label>{{tag}}</ion-label>
+        <ion-label>{{tag.tagName}}</ion-label>
         <button ion-button clear color="dark" (click)="delete(tag)">
           <ion-icon name="close-circle"></ion-icon>
         </button>
@@ -70,6 +78,6 @@
     </div>
   </div>
   <div style="margin-left:16px;margin-right:20px;margin-bottom: 20px;">
-    <button full ion-button class="sub-button">Valider</button>
+    <button full ion-button class="sub-button" (click)="createEvent()">Valider</button>
   </div>
 </ion-content>

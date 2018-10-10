@@ -24,35 +24,35 @@
           <img class="rond" src="images/yellow-point.png" />
         </ion-col>
         <ion-col col-8>
-          <h2>{{event.title}}</h2>
-          <p style="margin: 0.3em 0;">par {{event.creator.username}}</p>
+          <h2>{{eventTag.event.title}}</h2>
+          <p style="margin: 0.3em 0;">par {{eventTag.event.creator.username}}</p>
           <span>
-            <span *ngIf="event.dateEvent.getDate()<10">0</span>{{event.dateEvent.getDate()}}/
-            <span *ngIf="event.dateEvent.getMonth()+1<10">0</span>{{event.dateEvent.getMonth()+1}}/{{event.dateEvent.getFullYear()}} à
-            <span *ngIf="event.dateEvent.getHours()<10">0</span>{{event.dateEvent.getHours()}}h
-            <span *ngIf="event.dateEvent.getMinutes()<10">0</span>{{event.dateEvent.getMinutes()}}
+            <span *ngIf="eventTag.event.dateEvent.getDate()<10">0</span>{{eventTag.event.dateEvent.getDate()}}/
+            <span *ngIf="eventTag.event.dateEvent.getMonth()+1<10">0</span>{{eventTag.event.dateEvent.getMonth()+1}}/{{eventTag.event.dateEvent.getFullYear()}} à
+            <span *ngIf="eventTag.event.dateEvent.getHours()<10">0</span>{{eventTag.event.dateEvent.getHours()}}h
+            <span *ngIf="eventTag.event.dateEvent.getMinutes()<10">0</span>{{eventTag.event.dateEvent.getMinutes()}}
           </span>
         </ion-col>
       </ion-row>
     </ion-grid>
-    <div [ngClass]="getColor(event.categ)" style="padding-top: 50px;" padding>
+    <div [ngClass]="getColor(eventTag.event.categ)" style="padding-top: 50px;" padding>
 
-      <div *ngIf="event.address != null">
+      <div *ngIf="eventTag.event.address != null">
         <p class="medium">
-          <b>{{event.address[0].subThoroughfare}} {{event.address[0].thoroughfare}} {{event.address[0].postalCode}} {{event.address[0].locality}}
-            {{event.address[0].country}}
+          <b>{{eventTag.event.address[0].subThoroughfare}} {{eventTag.event.address[0].thoroughfare}} {{eventTag.event.address[0].postalCode}} {{eventTag.event.address[0].locality}}
+            {{eventTag.event.address[0].country}}
           </b>
         </p>
       </div>
-      <p class="desc light">{{event.description}}</p>
-      <span class="card-size medium" *ngFor="let tag of event.tags">
-        <i>#{{tag}}</i>
+      <p class="desc light">{{eventTag.event.description}}</p>
+      <span class="card-size medium" *ngFor="let tag of eventTag.tags">
+        <i>#{{tag.tagName}}</i>
       </span>
     </div>
-    <button *ngIf="!isParticipant" ion-button full class="sub-button medium">M'inscrire
+    <button *ngIf="!isParticipant" ion-button full class="sub-button medium" (click)="subToEvent">M'inscrire
       <img class="logo-size" src="images/projet-y.png" />
     </button>
-    <button *ngIf="isParticipant" ion-button full class="unsub-button medium">Me désinscrire
+    <button *ngIf="isParticipant" ion-button full class="unsub-button medium" (click)="unsubToEvent">Me désinscrire
       <img class="logo-size" src="images/projet-y.png" />
     </button>
     <ion-segment [(ngModel)]="menu">
@@ -66,7 +66,7 @@
 
     <div [ngSwitch]="menu">
       <ion-list *ngSwitchCase="'part'">
-        <ion-item *ngFor="let user of event.participants">
+        <ion-item *ngFor="let user of eventTag.event.participants">
           <ion-thumbnail item-start>
             <img class="rond" src="{{user.picture}}">
           </ion-thumbnail>
@@ -82,7 +82,7 @@
               <button ion-button full class="sub-button">Envoyer</button>
         </div>
 
-        <div *ngFor="let comments of event.commentary">
+        <div *ngFor="let comments of eventTag.event.commentary">
           <div class="comment-text">
             <div style="height: 0px;">
               <img class="rond test" src="{{comments.picture}}">

@@ -14,7 +14,7 @@ export class SocketProvider {
 
   socketLogin(userId) {
     var config: SocketIoConfig = {
-      url: 'http://192.168.1.57:8080', options: {
+      url: 'http://172.16.2.205:8080', options: {
         "force new connection": true,
         "reconnectionAttempts": "Infinity", //avoid having user reconnect manually in order to prevent dead clients after a server restart
         "timeout": 10000,                  //before connect_error and connect_timeout are emitted.

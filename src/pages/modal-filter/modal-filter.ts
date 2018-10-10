@@ -70,9 +70,9 @@ export class ModalFilterPage {
   showModal() {
     // reset 
     this.address = '';
-    // show modal|
+    // show modal
     console.log('call showmodal');
-    let modal = this.modalCtrl.create(modalGooglePlacesPage, { type: "(cities)" });
+    let modal = this.modalCtrl.create(modalGooglePlacesPage);
     modal.onDidDismiss(data => {
       console.log('page > modal dismissed > data > ', data);
       if (data) {

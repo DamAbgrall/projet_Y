@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { MapProvider } from '../../providers/map/map';
 import { EventViewPage } from '../event-view/event-view';
+import { RequestProvider } from '../../providers/request/request';
 
 /**
  * Generated class for the EventListPage page.
@@ -16,180 +17,84 @@ import { EventViewPage } from '../event-view/event-view';
 })
 export class EventListPage {
 
-  firstTagList = [{
-    title: "Titre",
-    dateEvent: new Date(),
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    picture: "images/60277c31ce5030f22d5df389083e8fe9.jpg",
-    maxAttendees: 10,
-    creator: {
-      name: "Nom",
-      firstName: 'prénom',
-      username: "pseudo"
-    },
-    isEnd: false,
-    startDate: new Date(),
-    endDate: new Date(),
-    coordinates: {
-      lat: 47.086329,
-      long: -1.558949
-    },
-    address: null,
-    tags: ['football', 'basketball', 'rugby', 'patate', 'avion'],
-    EventType: "",
-    categ: "e",
-    participants:[{'username':'Participants 1','picture':'images/yellow-point.png'},{'username':'Participants 2','picture':'images/yellow-point.png'}],
-    commentary:[{'username':'Participants 1','picture':'images/yellow-point.png','comment':'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'},{'username':'participants 2','picture':'images/yellow-point.png','comment':'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'}],
-  }, {
-    title: "Titre",
-    dateEvent: new Date(),
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    picture: "images/60277c31ce5030f22d5df389083e8fe9.jpg",
-    maxAttendees: 10,
-    creator: {
-      name: "Nom",
-      firstName: 'prénom',
-      username: "pseudo"
-    },
-    isEnd: false,
-    startDate: new Date(),
-    endDate: new Date(),
-    coordinates: {
-      lat: 47.086329,
-      long: -1.558949
-    },
-    address: null,
-    tags: ['football', 'basketball', 'rugby', 'patate', 'avion'],
-    EventType: "",
-    categ: "s",
-    participants:[{'username':'Participants 1','picture':'images/yellow-point.png'},{'username':'Participants 2','picture':'images/yellow-point.png'}],
-    commentary:[{'username':'Participants 1','picture':'images/yellow-point.png','comment':'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'},{'username':'participants 1','picture':'images/yellow-point.png','comment':'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'}],
-  }, {
-    title: "Titre",
-    dateEvent: new Date(),
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    picture: "images/60277c31ce5030f22d5df389083e8fe9.jpg",
-    maxAttendees: 10,
-    creator: {
-      name: "Nom",
-      firstName: 'prénom',
-      username: "pseudo"
-    },
-    isEnd: false,
-    startDate: new Date(),
-    endDate: new Date(),
-    coordinates: {
-      lat: 47.086329,
-      long: -1.558949
-    },
-    address: null,
-    tags: ['football', 'basketball', 'rugby', 'patate', 'avion'],
-    EventType: "",
-    categ: "p",
-    participants:[{'username':'participants 1','picture':'images/yellow-point.png'},{'username':'participants 2','picture':'images/yellow-point.png'}],
-    commentary:[{'username':'participants 1','picture':'images/yellow-point.png','comment':'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'},{'username':'participants 1','picture':'images/yellow-point.png','comment':'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'}],
-  }, {
-    title: "Titre",
-    dateEvent: new Date(),
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    picture: "images/60277c31ce5030f22d5df389083e8fe9.jpg",
-    maxAttendees: 10,
-    creator: {
-      name: "Nom",
-      firstName: 'prénom',
-      username: "pseudo"
-    },
-    isEnd: false,
-    startDate: new Date(),
-    endDate: new Date(),
-    coordinates: {
-      lat: 47.086329,
-      long: -1.558949
-    },
-    address: null,
-    tags: ['football', 'basketball', 'rugby', 'patate', 'avion'],
-    EventType: "",
-    categ: "l",
-    participants:[{'username':'participants 1','picture':'images/yellow-point.png'},{'username':'participants 2','picture':'images/yellow-point.png'}],
-    commentary:[{'username':'participants 1','picture':'images/yellow-point.png','comment':'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'},{'username':'participants 1','picture':'images/yellow-point.png','comment':'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'}],
-  }];
+  firstTagList = [];
 
-  evenement:boolean = true;
-  sortie:boolean = true;
-  pleinAir:boolean = true;
-  loisir:boolean = true;
+  evenement: boolean = true;
+  sortie: boolean = true;
+  pleinAir: boolean = true;
+  loisir: boolean = true;
 
-  eventList:any;
-  
-  constructor(public navCtrl: NavController, public navParams: NavParams, public map: MapProvider) {
-    this.eventList = this.firstTagList 
+  eventTagList: any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public map: MapProvider, public request: RequestProvider) {
   }
-  ionViewDidLoad() {
-    for (let key in this.eventList) {
-      this.map.latLngtoAddr(this.eventList[key].coordinates.lat, this.eventList[key].coordinates.long).then(res => {
-        console.log(key)
-        console.log(this.eventList[key])
-        this.eventList[key].address = res;
-      }).catch(err => {
-        console.error(err)
-      })
-    }
+  ionViewWillEnter() {
+    this.request.getAll("event").then(res => {
+      this.firstTagList = res;
+      this.eventTagList = this.firstTagList
+      this.eventTagList.forEach(eventTag => {
+        eventTag.event.endDate = new Date(eventTag.event.endDate)
+        eventTag.event.startDate = new Date(eventTag.event.startDate)
+      });
+    }).catch(err => {
+      console.error(err);
+    })
   }
 
   getColor(categ) {
-    if (categ == "l") {
+    if (categ.name == "Loisir") {
       return "jaune"
-    } else if (categ == "e") {
+    } else if (categ.name == "Evenement") {
       return "violet";
-    } else if (categ == "p") {
+    } else if (categ.name == "Plein air") {
       return "vert";
-    } else if (categ == "s") {
-      return "rouge";
+    } else if (categ.name == "Sortie") {
+      return "rouge"; 
     } else {
       return "noir";
     }
   }
 
-  detail(event){
-    this.navCtrl.push(EventViewPage,{"event":event})
+  detail(event) {
+    this.navCtrl.push(EventViewPage, { "event": event })
   }
 
 
-  filter(){
-    var categList=[];
-    if(this.evenement){
-      categList=categList.concat("e");
+  filter() {
+    var categList = [];
+    if (this.evenement) {
+      categList = categList.concat("Evenement");
     }
-    if(this.sortie){
-      categList=categList.concat("s");
+    if (this.sortie) {
+      categList = categList.concat("Sortie");
     }
-    if(this.pleinAir){
-      categList=categList.concat("p");
+    if (this.pleinAir) {
+      categList = categList.concat("Plein air");
     }
-    if(this.loisir){
-      categList=categList.concat("l");
+    if (this.loisir) {
+      categList = categList.concat("Loisir");
     }
-    this.eventList=[];
-    for(let event of this.firstTagList){
-      if(categList.indexOf(event.categ)>=0){
-        this.eventList = this.eventList.concat(event)
+    this.eventTagList = [];
+    for (let eventTag of this.firstTagList) {
+      if (categList.indexOf(eventTag.event.category.name) >= 0) {
+        this.eventTagList = this.eventTagList.concat(eventTag)
       }
     }
   }
 
-  changeE(){
+  changeE() {
     this.evenement = !this.evenement;
     this.filter();
   }
-  changeS(){
+  changeS() {
     this.sortie = !this.sortie;
     this.filter();
   }
-  changeP(){
+  changeP() {
     this.pleinAir = !this.pleinAir;
     this.filter();
   }
-  changeL(){
+  changeL() {
     this.loisir = !this.loisir;
     this.filter();
   }

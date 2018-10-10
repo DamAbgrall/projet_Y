@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { RequestProvider } from '../../providers/request/request';
 
 /**
  * Generated class for the EventViewPage page.
@@ -16,16 +17,18 @@ export class EventViewPage {
 
   event:any;
   menu="part";
-  isParticipant:boolean=true;
-  me:any;
+  isParticipant:boolean;
+  isCreator:boolean;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.event = this.navParams.data.event;
-    for(let participant of this.event.participants){
-      if(this.me == participant){
+  constructor(public navCtrl: NavController, public navParams: NavParams, public request: RequestProvider) {
+    this.event = this.navParams.get("event");
+    console.log(this.event)
+    this.isCreator = this.request.userId == this.event
+    /*for(let participant of this.eventTag.participants){
+      if(this.request.userId == participant._id){
         this.isParticipant = true;
       }
-    }
+    }*/
   }
 
 
@@ -41,6 +44,19 @@ export class EventViewPage {
     } else {
       return "noir";
     }
+  }
+
+  subToEvent(){
+    this.request.create("eventSub",{"userSub" : this.request.userId,"eventSub" : this.event._id}).then(res=>{
+      this.isParticipant = true;
+      console.log(res)
+    }).catch(err=>{
+      console.error(err);
+    })
+  }
+
+  unsubToEvent(){
+    //TODO
   }
 
 }

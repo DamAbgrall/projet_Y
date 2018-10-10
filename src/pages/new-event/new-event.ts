@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
-import { ModalController, NavController, NavParams,ActionSheetController } from 'ionic-angular';
-import { modalGooglePlacesPage } from '../modalGooglePlaces/modalGooglePlaces';
+import { ModalController, NavController, NavParams, ActionSheetController } from 'ionic-angular';
 import { ModalTagPage } from '../modal-tag/modal-tag';
 import { Camera } from '@ionic-native/camera';
 import { Crop } from '@ionic-native/crop';
 import { File } from '@ionic-native/file';
+import { RequestProvider } from '../../providers/request/request';
+import { MapProvider } from '../../providers/map/map';
+
+declare var google: any;
 
 /**
  * Generated class for the NewEventPage page.
@@ -18,29 +21,67 @@ import { File } from '@ionic-native/file';
   templateUrl: 'new-event.html',
 })
 export class NewEventPage {
-  address = {
-    place: '',
-    set: false,
-  };
-  TagList = []
+
+  TagList = [];
+  categories = [];
   lastImage = "images/60277c31ce5030f22d5df389083e8fe9.png";
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController,public actionSheetCtrl: ActionSheetController,public file: File,public crop: Crop,private camera: Camera) {
-  }
-  showModal() {
-    // reset 
-    this.address.place = '';
-    this.address.set = false;
-    // show modal|
-    console.log('call showmodal');
-    let modal = this.modalCtrl.create(modalGooglePlacesPage,{type:"geocode"});
-    modal.onDidDismiss(data => {
-      console.log('page > modal dismissed > data > ', data);
-      if (data) {
-        this.address.place = data.description;
-        // get details
-      }
+  inscription: Boolean;
+  attendees: Number;
+  title: String;
+  startDate: Date;
+  endDate: Date;
+  description: String;
+  autocompleteItems: any;
+  autocomplete: any = {};
+  acService: any;
+  addressChosen: Boolean = false;
+  location: any;
+  selectedCategory:any;
+
+  constructor(public map: MapProvider, public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public actionSheetCtrl: ActionSheetController, public file: File, public crop: Crop, private camera: Camera, public request: RequestProvider) {
+    console.log("construct");
+    this.autocomplete.description = "";
+    this.acService = new google.maps.places.AutocompleteService();
+    this.autocompleteItems = [];
+    this.request.getAll("category").then(res => {
+      this.categories = res;
+    }).catch(err => {
+      console.error(err);
     })
-    modal.present();
+  }
+
+  choose(item) {
+    this.autocomplete = item;
+    document.getElementById("divAutoComp").setAttribute("style", "display:none");
+  }
+
+  showItems() {
+    document.getElementById("divAutoComp").removeAttribute("style");
+  }
+
+  updateSearch() {
+    console.log('modal > updateSearch');
+    console.log(this.autocomplete);
+    if (this.autocomplete.description == '') {
+      this.autocompleteItems = [];
+      return;
+    }
+    let self = this;
+    let config = {
+      types: [], // other types available in the API: 'establishment', 'regions', and 'cities'
+      input: this.autocomplete.description,
+      componentRestrictions: { country: 'FR' }
+    }
+    this.acService.getPlacePredictions(config, function (predictions, status) {
+      console.log('modal > getPlacePredictions > status > ', status);
+      console.log(predictions);
+      self.autocompleteItems = [];
+      if (predictions) {
+        predictions.forEach(function (prediction) {
+          self.autocompleteItems.push(prediction);
+        });
+      }
+    });
   }
 
   showTagModal() {
@@ -109,10 +150,79 @@ export class NewEventPage {
           console.error(err);
         })
         console.log(newImage);
+        var tempPathnewImage = newImage.split('/');
+        var newFileName = tempPathnewImage.pop().split('?')[0];
+        var newFilePath = "";
+        for (let str of tempPathnewImage) {
+          if (newFilePath == '') {
+            newFilePath = str;
+          } else {
+            newFilePath = newFilePath + '/' + str;
+          }
+        }
         this.lastImage = newImage;
+        this.file.readAsDataURL(newFilePath,newFileName).then(res=>{
+          console.log(res);
+        }).catch(err=>{
+          console.error(err);
+        })
       });
     }, (err) => {
       console.error(err);
     });
+  }
+
+  createEvent(){
+    this.map.addrtoLatLng(this.autocomplete).then(res => {
+      if(res.subThoroughfare !=undefined && res.thoroughfare !=undefined) var addr = res.subThoroughfare +" "+ res.thoroughfare
+      var tagListId =[]
+      this.TagList.forEach(tag=>{
+        tagListId.push(tag._id);
+      })
+      console.log(res);
+      let event = {
+        "title": this.title,
+        "picture":"",
+        "startDate": this.startDate,
+        "endDate": this.endDate,
+        "isEnd": false,
+        "comments": [],
+        "rates": [],
+        "validations": [],
+        "description":this.description,
+        "options": {
+          "subValided": false,
+          "hideAddr": this.inscription,
+          "subscription": this.inscription
+        },
+        "maxAttendees": this.attendees,
+        "tags": tagListId,
+        "category": this.selectedCategory,
+        "coordinates": {
+          "long":res[0].position.lng,
+          "lat":res[0].position.lat,
+        },
+        "creator":this.request.userId,
+        "localisation":{
+          "place_id":this.autocomplete.place_id,
+          "long":res[0].position.lng,
+          "lat":res[0].position.lat,
+          "adress":addr,
+          "zip":res[0].postalCode,
+          "city":res[0].locality,
+          "country":res[0].country,
+          "name":this.autocomplete.description,
+        }
+      }
+      console.log(event);
+      this.request.create("event", event).then(res => {
+        console.log(res);
+      }).catch(err => {
+        console.error(err);
+      })
+    }).catch(err => {
+      console.error(err);
+    })
+
   }
 }

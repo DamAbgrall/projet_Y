@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { ModalController, NavController, NavParams,ActionSheetController } from 'ionic-angular';
+import { ModalController, NavController, NavParams, ActionSheetController } from 'ionic-angular';
 import { ModalTagPage } from '../modal-tag/modal-tag';
 import { Camera } from '@ionic-native/camera';
 import { Crop } from '@ionic-native/crop';
 import { File } from '@ionic-native/file';
+import { RequestProvider } from '../../providers/request/request';
+
 /**
  * Generated class for the SettingsPage page.
  *
@@ -25,9 +27,9 @@ export class SettingsPage {
   PleinAir: boolean = true;
   Sortie: boolean = true;
   Evenement: boolean = true;
-  lastImage:any;
+  lastImage: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController,public actionSheetCtrl: ActionSheetController,public file: File,public crop: Crop,private camera: Camera) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public actionSheetCtrl: ActionSheetController, public file: File, public crop: Crop, private camera: Camera, public request: RequestProvider) {
   }
 
 
@@ -87,53 +89,58 @@ export class SettingsPage {
         })
         console.log(newImage);
         this.lastImage = newImage;
+        this.request.updateImage(newImage).then(res=>{
+          console.log(res)
+        }).catch(err=>{
+          console.error(err);
+        })
       });
-    }, (err) => {
-      console.error(err);
-    });
+  }, (err) => {
+    console.error(err);
+  });
   }
 
-  showLoisirTagModal() {
+showLoisirTagModal() {
+  console.log(this.LoisirTagList);
+  let modal = this.modalCtrl.create(ModalTagPage, { "tagList": this.LoisirTagList });
+  modal.onDidDismiss(data => {
+    this.LoisirTagList = data;
     console.log(this.LoisirTagList);
-    let modal = this.modalCtrl.create(ModalTagPage, { "tagList": this.LoisirTagList });
-    modal.onDidDismiss(data => {
-      this.LoisirTagList = data;
-      console.log(this.LoisirTagList);
-    })
-    modal.present();
-  }
-  showPleinAirTagModal() {
+  })
+  modal.present();
+}
+showPleinAirTagModal() {
+  console.log(this.PleinAirTagList);
+  let modal = this.modalCtrl.create(ModalTagPage, { "tagList": this.PleinAirTagList });
+  modal.onDidDismiss(data => {
+    this.PleinAirTagList = data;
     console.log(this.PleinAirTagList);
-    let modal = this.modalCtrl.create(ModalTagPage, { "tagList": this.PleinAirTagList });
-    modal.onDidDismiss(data => {
-      this.PleinAirTagList = data;
-      console.log(this.PleinAirTagList);
-      console.log(this.LoisirTagList)
-    })
-    modal.present();
-  }
-  showSortieTagModal() {
+    console.log(this.LoisirTagList)
+  })
+  modal.present();
+}
+showSortieTagModal() {
+  console.log(this.SortieTagList);
+  let modal = this.modalCtrl.create(ModalTagPage, { "tagList": this.SortieTagList });
+  modal.onDidDismiss(data => {
+    this.SortieTagList = data;
     console.log(this.SortieTagList);
-    let modal = this.modalCtrl.create(ModalTagPage, { "tagList": this.SortieTagList });
-    modal.onDidDismiss(data => {
-      this.SortieTagList = data;
-      console.log(this.SortieTagList);
-      console.log(this.LoisirTagList)
-    })
-    modal.present();
-  }
-  showEvenementTagModal() {
+    console.log(this.LoisirTagList)
+  })
+  modal.present();
+}
+showEvenementTagModal() {
+  console.log(this.EvenementTagList);
+  let modal = this.modalCtrl.create(ModalTagPage, { "tagList": this.EvenementTagList });
+  modal.onDidDismiss(data => {
+    this.EvenementTagList = data;
     console.log(this.EvenementTagList);
-    let modal = this.modalCtrl.create(ModalTagPage, { "tagList": this.EvenementTagList });
-    modal.onDidDismiss(data => {
-      this.EvenementTagList = data;
-      console.log(this.EvenementTagList);
-      console.log(this.LoisirTagList)
-    })
-    modal.present();
-  }
-  delete(tag, list) {
-    list.splice(list.indexOf(tag), 1);
-  }
+    console.log(this.LoisirTagList)
+  })
+  modal.present();
+}
+delete (tag, list) {
+  list.splice(list.indexOf(tag), 1);
+}
 
 }

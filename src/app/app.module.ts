@@ -12,6 +12,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
 import { Camera } from '@ionic-native/camera';
 import { Crop } from '@ionic-native/crop';
 import { File } from '@ionic-native/file';
+import { FileTransfer } from '@ionic-native/file-transfer';
 
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
@@ -29,6 +30,8 @@ import { SocketProvider } from '../providers/socket/socket';
 import { RequestProvider } from '../providers/request/request';
 
 import { Socket } from 'ng-socket-io';
+import { FilterTag } from '../providers/filter-tag/filter-tag';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -41,7 +44,8 @@ import { Socket } from 'ng-socket-io';
     EventViewPage,
     MyEventPage,
     SettingsPage,
-    ModalFilterPage
+    ModalFilterPage,
+    FilterTag
   ],
   imports: [
     BrowserModule,
@@ -77,7 +81,8 @@ import { Socket } from 'ng-socket-io';
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     MapProvider,
     SocketProvider,
-    RequestProvider
+    RequestProvider,
+    FileTransfer,
   ]
 })
 export class AppModule { }

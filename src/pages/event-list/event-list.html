@@ -10,33 +10,36 @@
     <button ion-button [ngClass]="{'bg-gris':!sortie,'bc-rouge':sortie}" (click)="changeS()" class="top-btn">Sortie</button>
     <button ion-button [ngClass]="{'bg-gris':!pleinAir,'bc-vert':pleinAir}" (click)="changeP()" class="top-btn">Plein air</button>
     <button ion-button [ngClass]="{'bg-gris':!loisir,'bc-jaune':loisir}" (click)="changeL()" class="top-btn">Loisir</button>
-    <ion-card [ngClass]="getColor(event.categ)" *ngFor="let event of eventList">
+    <ion-card [ngClass]="getColor(eventTag.event.category)" *ngFor="let eventTag of eventTagList">
         <div class="overlay">
             <div padding>
-                <h2 class="medium">{{event.title}}</h2>
+                <h2 class="medium">{{eventTag.event.title}}</h2>
                 <p class="medium">
                     <b>
-                        <span *ngIf="event.dateEvent.getDate()<10">0</span>{{event.dateEvent.getDate()}}/<span *ngIf="event.dateEvent.getMonth()+1<10">0</span>{{event.dateEvent.getMonth()+1}}/{{event.dateEvent.getFullYear()}} à
-                        <span *ngIf="event.dateEvent.getHours()<10">0</span>{{event.dateEvent.getHours()}}h<span *ngIf="event.dateEvent.getMinutes()<10">0</span>{{event.dateEvent.getMinutes()}}
+                        <span *ngIf="eventTag.event.startDate.getDate()<10">0</span>{{eventTag.event.startDate.getDate()}}/<span *ngIf="eventTag.event.startDate.getMonth()+1<10">0</span>{{eventTag.event.startDate.getMonth()+1}}/{{eventTag.event.startDate.getFullYear()}} à
+                        <span *ngIf="eventTag.event.startDate.getHours()<10">0</span>{{eventTag.event.startDate.getHours()}}h<span *ngIf="eventTag.event.startDate.getMinutes()<10">0</span>{{eventTag.event.startDate.getMinutes()}}
+                        à 
+                        <span *ngIf="eventTag.event.endDate.getDate()<10">0</span>{{eventTag.event.endDate.getDate()}}/<span *ngIf="eventTag.event.endDate.getMonth()+1<10">0</span>{{eventTag.event.endDate.getMonth()+1}}/{{eventTag.event.endDate.getFullYear()}} à
+                        <span *ngIf="eventTag.event.endDate.getHours()<10">0</span>{{eventTag.event.endDate.getHours()}}h<span *ngIf="eventTag.event.endDate.getMinutes()<10">0</span>{{eventTag.event.endDate.getMinutes()}}
                     </b>
                 </p>
-                <div *ngIf="event.address != null">
+                <div *ngIf="eventTag.event.localisation != null">
                     <p class="medium">
-                        <b>{{event.address[0].subThoroughfare}} {{event.address[0].thoroughfare}} {{event.address[0].postalCode}}
-                            {{event.address[0].locality}} {{event.address[0].country}}
+                        <b>{{eventTag.event.localisation.adress}} {{eventTag.event.localisation.zip}}
+                            {{eventTag.event.localisation.city}} {{eventTag.event.localisation.country}}
                         </b>
                     </p>
                 </div>
-                <p class="desc light">{{event.description}}</p>
+                <p class="desc light">{{eventTag.event.description}}</p>
                 <ion-grid>
                     <ion-row>
                         <ion-col col-10>
-                            <span class="card-size medium" *ngFor="let tag of event.tags">
-                                <i>#{{tag}}</i>
+                            <span class="card-size medium" *ngFor="let tag of eventTag.tags">
+                                <i>#{{tag.tag.tagName}}</i>
                             </span>
                         </ion-col>
                         <ion-col col-2>
-                            <button (click)="detail(event)" class="plus-btn" ion-button>
+                            <button (click)="detail(eventTag.event)" class="plus-btn" ion-button>
                                 <ion-icon name="add"></ion-icon>
                             </button>
                         </ion-col>
