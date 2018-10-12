@@ -4,13 +4,6 @@ import { MapProvider } from '../../providers/map/map';
 import { EventViewPage } from '../event-view/event-view';
 import { RequestProvider } from '../../providers/request/request';
 
-/**
- * Generated class for the EventListPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @Component({
   selector: 'page-event-list',
   templateUrl: 'event-list.html',
@@ -29,7 +22,7 @@ export class EventListPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public map: MapProvider, public request: RequestProvider) {
   }
   ionViewWillEnter() {
-    this.request.getAll("event").then(res => {
+    this.request.getEventRadius().then(res => {
       this.firstTagList = res;
       this.eventTagList = this.firstTagList
       this.eventTagList.forEach(eventTag => {
@@ -57,8 +50,7 @@ export class EventListPage {
 
   detail(event) {
     this.navCtrl.push(EventViewPage, { "event": event })
-  }
-
+  } 
 
   filter() {
     var categList = [];
@@ -98,6 +90,5 @@ export class EventListPage {
     this.loisir = !this.loisir;
     this.filter();
   }
-
 
 }

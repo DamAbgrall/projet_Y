@@ -8,9 +8,7 @@ export class SocketProvider {
 
   socket: any
 
-  constructor(public http: HttpClient, public notif: LocalNotifications) {
-    console.log('Hello SocketProvider Provider');
-  }
+  constructor(public http: HttpClient, public notif: LocalNotifications) {}
 
   socketLogin(userId) {
     var config: SocketIoConfig = {
@@ -37,10 +35,5 @@ export class SocketProvider {
 
   send(eventName, eventData) {
     this.socket.emit(eventName, eventData);
-  }
-
-  test() {
-    console.log(this.socket)
-    this.socket.connect();
   }
 }

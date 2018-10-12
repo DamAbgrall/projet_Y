@@ -1,10 +1,9 @@
 <ion-header>
-
     <ion-navbar>
-        <ion-title>eventList</ion-title>
+        <ion-title>Liste des événements</ion-title>
     </ion-navbar>
-
 </ion-header>
+
 <ion-content>
     <button ion-button [ngClass]="{'bg-gris':!evenement,'bc-bleu':evenement}" (click)="changeE()" class="top-btn">Evénement</button>
     <button ion-button [ngClass]="{'bg-gris':!sortie,'bc-rouge':sortie}" (click)="changeS()" class="top-btn">Sortie</button>

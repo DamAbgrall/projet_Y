@@ -2,13 +2,6 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { RequestProvider } from '../../providers/request/request';
 
-/**
- * Generated class for the EventViewPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @Component({
   selector: 'page-event-view',
   templateUrl: 'event-view.html',

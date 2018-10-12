@@ -31,7 +31,7 @@ export class MapPage {
     this.element = document.getElementById('map');
     this.mapProvider.loadMap(this.element).then((mapData) => {
       this.map = mapData.map;
-      this.request.getAll("EventsTags").then(res=>{
+      this.request.getEventRadius().then(res=>{
         this.mapProvider.addMarker(res);
       }).catch(err=>{
         console.error(err);

@@ -2,12 +2,7 @@
 import { NavController, ViewController  } from 'ionic-angular';
 
 declare var google: any;
-/*
-  Generated class for the modalGooglePlaces page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
     selector: 'page-modalGooglePlaces',
     templateUrl: 'modalGooglePlaces.html'

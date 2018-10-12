@@ -6,13 +6,6 @@ import { Crop } from '@ionic-native/crop';
 import { File } from '@ionic-native/file';
 import { RequestProvider } from '../../providers/request/request';
 
-/**
- * Generated class for the SettingsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @Component({
   selector: 'page-settings',
   templateUrl: 'settings.html',
@@ -31,7 +24,6 @@ export class SettingsPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public actionSheetCtrl: ActionSheetController, public file: File, public crop: Crop, private camera: Camera, public request: RequestProvider) {
   }
-
 
   public presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
@@ -89,58 +81,58 @@ export class SettingsPage {
         })
         console.log(newImage);
         this.lastImage = newImage;
-        this.request.updateImage(newImage).then(res=>{
+        this.request.updateImage("users/image/", newImage, this.request.userId).then(res => {
           console.log(res)
-        }).catch(err=>{
+        }).catch(err => {
           console.error(err);
         })
       });
-  }, (err) => {
-    console.error(err);
-  });
+    }, (err) => {
+      console.error(err);
+    });
   }
 
-showLoisirTagModal() {
-  console.log(this.LoisirTagList);
-  let modal = this.modalCtrl.create(ModalTagPage, { "tagList": this.LoisirTagList });
-  modal.onDidDismiss(data => {
-    this.LoisirTagList = data;
+  showLoisirTagModal() {
     console.log(this.LoisirTagList);
-  })
-  modal.present();
-}
-showPleinAirTagModal() {
-  console.log(this.PleinAirTagList);
-  let modal = this.modalCtrl.create(ModalTagPage, { "tagList": this.PleinAirTagList });
-  modal.onDidDismiss(data => {
-    this.PleinAirTagList = data;
+    let modal = this.modalCtrl.create(ModalTagPage, { "tagList": this.LoisirTagList });
+    modal.onDidDismiss(data => {
+      this.LoisirTagList = data;
+      console.log(this.LoisirTagList);
+    })
+    modal.present();
+  }
+  showPleinAirTagModal() {
     console.log(this.PleinAirTagList);
-    console.log(this.LoisirTagList)
-  })
-  modal.present();
-}
-showSortieTagModal() {
-  console.log(this.SortieTagList);
-  let modal = this.modalCtrl.create(ModalTagPage, { "tagList": this.SortieTagList });
-  modal.onDidDismiss(data => {
-    this.SortieTagList = data;
+    let modal = this.modalCtrl.create(ModalTagPage, { "tagList": this.PleinAirTagList });
+    modal.onDidDismiss(data => {
+      this.PleinAirTagList = data;
+      console.log(this.PleinAirTagList);
+      console.log(this.LoisirTagList)
+    })
+    modal.present();
+  }
+  showSortieTagModal() {
     console.log(this.SortieTagList);
-    console.log(this.LoisirTagList)
-  })
-  modal.present();
-}
-showEvenementTagModal() {
-  console.log(this.EvenementTagList);
-  let modal = this.modalCtrl.create(ModalTagPage, { "tagList": this.EvenementTagList });
-  modal.onDidDismiss(data => {
-    this.EvenementTagList = data;
+    let modal = this.modalCtrl.create(ModalTagPage, { "tagList": this.SortieTagList });
+    modal.onDidDismiss(data => {
+      this.SortieTagList = data;
+      console.log(this.SortieTagList);
+      console.log(this.LoisirTagList)
+    })
+    modal.present();
+  }
+  showEvenementTagModal() {
     console.log(this.EvenementTagList);
-    console.log(this.LoisirTagList)
-  })
-  modal.present();
-}
-delete (tag, list) {
-  list.splice(list.indexOf(tag), 1);
-}
+    let modal = this.modalCtrl.create(ModalTagPage, { "tagList": this.EvenementTagList });
+    modal.onDidDismiss(data => {
+      this.EvenementTagList = data;
+      console.log(this.EvenementTagList);
+      console.log(this.LoisirTagList)
+    })
+    modal.present();
+  }
+  delete(tag, list) {
+    list.splice(list.indexOf(tag), 1);
+  }
 
 }

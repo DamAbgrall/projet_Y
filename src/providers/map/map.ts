@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { GoogleMaps, GoogleMap, GoogleMapsEvent, Geocoder, LatLng, MarkerOptions, Marker, GoogleMapsAnimation, HtmlInfoWindow } from '@ionic-native/google-maps';
 import { Events } from 'ionic-angular';
-import { RequestProvider } from '../request/request';
 
 @Injectable()
 export class MapProvider {
@@ -10,7 +9,7 @@ export class MapProvider {
     eventMarkerInfoList: Array<{event:any,marker:Marker,infoWindow:HtmlInfoWindow}> = [];
     currentMaker: Marker;
     
-    constructor(public googleMap: GoogleMaps, public events: Events,public request : RequestProvider) {}
+    constructor(public googleMap: GoogleMaps, public events: Events) {}
 
     loadMap(element: HTMLElement) {
         this.mapDiv = element;
@@ -19,7 +18,7 @@ export class MapProvider {
                 'controls': {
                     'compass': true,
                     'indoorPicker': true,
-                    'zoom': true, // Only for Android
+                    'zoom': true,
                     'myLocationButton': true,
                     'myLocation': true,
                 },

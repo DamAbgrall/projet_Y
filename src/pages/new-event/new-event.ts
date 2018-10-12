@@ -6,15 +6,9 @@ import { Crop } from '@ionic-native/crop';
 import { File } from '@ionic-native/file';
 import { RequestProvider } from '../../providers/request/request';
 import { MapProvider } from '../../providers/map/map';
+import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 declare var google: any;
-
-/**
- * Generated class for the NewEventPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @Component({
   selector: 'page-new-event',
@@ -36,10 +30,40 @@ export class NewEventPage {
   acService: any;
   addressChosen: Boolean = false;
   location: any;
-  selectedCategory:any;
+  selectedCategory: any;
+  event : FormGroup;
 
-  constructor(public map: MapProvider, public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public actionSheetCtrl: ActionSheetController, public file: File, public crop: Crop, private camera: Camera, public request: RequestProvider) {
-    console.log("construct");
+  constructor(public map: MapProvider, public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public actionSheetCtrl: ActionSheetController, public file: File, public crop: Crop, private camera: Camera, public request: RequestProvider,private formBuilder: FormBuilder) {
+    this.event = this.formBuilder.group( {
+      "title": ,
+      "picture": "",
+      "startDate": ,
+      "endDate": ,
+      "isEnd": ,
+      "description": ['', Validators.required],
+      "options": {
+        "subValided": false,
+        "hideAddr": this.inscription,
+        "subscription": this.inscription
+      },
+      "maxAttendees": ['', Validators.required],
+      "category": this.selectedCategory,
+      "coordinates": {
+        "long": res[0].position.lng,
+        "lat": res[0].position.lat,
+      },
+      "creator": this.request.userId,
+      "localisation": {
+        "place_id": this.autocomplete.place_id,
+        "long": res[0].position.lng,
+        "lat": res[0].position.lat,
+        "adress": addr,
+        "zip": res[0].postalCode,
+        "city": res[0].locality,
+        "country": res[0].country,
+        "name": this.autocomplete.description,
+      }
+    });
     this.autocomplete.description = "";
     this.acService = new google.maps.places.AutocompleteService();
     this.autocompleteItems = [];
@@ -161,9 +185,9 @@ export class NewEventPage {
           }
         }
         this.lastImage = newImage;
-        this.file.readAsDataURL(newFilePath,newFileName).then(res=>{
+        this.file.readAsDataURL(newFilePath, newFileName).then(res => {
           console.log(res);
-        }).catch(err=>{
+        }).catch(err => {
           console.error(err);
         })
       });
@@ -172,24 +196,24 @@ export class NewEventPage {
     });
   }
 
-  createEvent(){
+  createEvent() {
     this.map.addrtoLatLng(this.autocomplete).then(res => {
-      if(res.subThoroughfare !=undefined && res.thoroughfare !=undefined) var addr = res.subThoroughfare +" "+ res.thoroughfare
-      var tagListId =[]
-      this.TagList.forEach(tag=>{
+      if (res.subThoroughfare != undefined && res.thoroughfare != undefined) var addr = res.subThoroughfare + " " + res.thoroughfare
+      var tagListId = []
+      this.TagList.forEach(tag => {
         tagListId.push(tag._id);
       })
       console.log(res);
       let event = {
         "title": this.title,
-        "picture":"",
+        "picture": "",
         "startDate": this.startDate,
         "endDate": this.endDate,
         "isEnd": false,
         "comments": [],
         "rates": [],
         "validations": [],
-        "description":this.description,
+        "description": this.description,
         "options": {
           "subValided": false,
           "hideAddr": this.inscription,
@@ -199,23 +223,28 @@ export class NewEventPage {
         "tags": tagListId,
         "category": this.selectedCategory,
         "coordinates": {
-          "long":res[0].position.lng,
-          "lat":res[0].position.lat,
+          "long": res[0].position.lng,
+          "lat": res[0].position.lat,
         },
-        "creator":this.request.userId,
-        "localisation":{
-          "place_id":this.autocomplete.place_id,
-          "long":res[0].position.lng,
-          "lat":res[0].position.lat,
-          "adress":addr,
-          "zip":res[0].postalCode,
-          "city":res[0].locality,
-          "country":res[0].country,
-          "name":this.autocomplete.description,
+        "creator": this.request.userId,
+        "localisation": {
+          "place_id": this.autocomplete.place_id,
+          "long": res[0].position.lng,
+          "lat": res[0].position.lat,
+          "adress": addr,
+          "zip": res[0].postalCode,
+          "city": res[0].locality,
+          "country": res[0].country,
+          "name": this.autocomplete.description,
         }
       }
       console.log(event);
       this.request.create("event", event).then(res => {
+        this.request.updateImage("event/image/", this.lastImage, res._id).then(res => {
+          console.log(res);
+        }).catch(err => {
+          console.error(err);
+        })
         console.log(res);
       }).catch(err => {
         console.error(err);

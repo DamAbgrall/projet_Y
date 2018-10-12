@@ -3,12 +3,6 @@ import { NavController, NavParams, ViewController, ModalController } from 'ionic
 import { modalGooglePlacesPage } from '../modalGooglePlaces/modalGooglePlaces';
 import { MapProvider } from '../../providers/map/map';
 import { ModalTagPage } from '../modal-tag/modal-tag';
-/**
- * Generated class for the ModalFilterPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @Component({
   selector: 'page-modal-filter',

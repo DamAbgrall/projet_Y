@@ -1,10 +1,9 @@
 <ion-header>
-
     <ion-navbar>
-        <ion-title>my-eventView</ion-title>
+        <ion-title>Mes événements</ion-title>
     </ion-navbar>
-
 </ion-header>
+
 <ion-content>
     <ion-card [ngClass]="getColor(event.categ)" *ngFor="let event of eventList">
         <div class="overlay">
