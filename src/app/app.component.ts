@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
 import { NewEventPage } from '../pages/new-event/new-event';
 import { MapPage } from '../pages/map/map';
+import { ProfilePage } from '../pages/profile/profile';
 import { ModalTagPage } from '../pages/modal-tag/modal-tag';
 import { EventListPage } from '../pages/event-list/event-list';
 import { SettingsPage } from '../pages/settings/settings';

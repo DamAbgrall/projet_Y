@@ -9,6 +9,7 @@ import { EventViewPage } from '../event-view/event-view';
 import { SettingsPage } from '../settings/settings';
 import { ModalFilterPage } from '../modal-filter/modal-filter';
 import { RequestProvider } from '../../providers/request/request';
+import { ProfilePage } from '../profile/profile';
 
 @Component({
   selector: 'page-map',
@@ -22,7 +23,8 @@ export class MapPage {
     'param': SettingsPage,
     'comingEvents': MyEventPage,
     'newEvent': NewEventPage,
-    'EventListPage': EventListPage
+    'EventListPage': EventListPage,
+    'ProfilePage':ProfilePage
   }
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public mapProvider: MapProvider, public menuCtrl: MenuController, public modalCtrl: ModalController, public events: Events, public request: RequestProvider) {

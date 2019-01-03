@@ -29,7 +29,7 @@
     </div>
     <ion-menu (ionOpen)="setMapClickable(false)" (ionClose)="setMapClickable(true)" [content]="mycontent" side="right" id="right" swipeEnabled="false">
         <ion-content>
-            <div class="profil">
+            <div class="profil" (click)="goTo('ProfilePage')">
                 <img src="images/yellow-point.png"/> 
                 <h4 class="medium">NOM PRENOM</h4>
             </div>

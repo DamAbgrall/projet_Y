@@ -1,0 +1,54 @@
+<ion-content padding>
+	<div class="profil">
+		<ion-row>
+			<ion-col col-5>
+				<img src="images/yellow-point.png" />
+			</ion-col>
+			<ion-col col-7>
+				<h4 class="medium">{{profile.name}}</h4>
+				<ion-icon class="top-star" [name]="getStar(1)"></ion-icon>
+				<ion-icon class="top-star" [name]="getStar(2)"></ion-icon>
+				<ion-icon class="top-star" [name]="getStar(3)"></ion-icon>
+				<ion-icon class="top-star" [name]="getStar(4)"></ion-icon>
+				<ion-icon class="top-star" [name]="getStar(5)"></ion-icon>
+				<p class="light-italic">Catégorie préféré : {{profile.prefered}} <img style="width: 25px" [src]="getPrefered()"></p>
+			</ion-col>
+		</ion-row>
+	</div>
+	<span class="light">Dernier commentaire :</span>
+	<ion-card class="first-comment-card">
+		<div>
+			<img style="width: 35px;" [src]="firstComment.author.profilePic" />
+			<span class="medium">{{firstComment.author.name}}</span>
+			<div style="float:right;">
+				<ion-icon class="comment-star" [name]="getCommentStar(firstComment,1)"></ion-icon>
+				<ion-icon class="comment-star" [name]="getCommentStar(firstComment,2)"></ion-icon>
+				<ion-icon class="comment-star" [name]="getCommentStar(firstComment,3)"></ion-icon>
+				<ion-icon class="comment-star" [name]="getCommentStar(firstComment,4)"></ion-icon>
+				<ion-icon class="comment-star" [name]="getCommentStar(firstComment,5)"></ion-icon>
+			</div>
+		</div>
+		<ion-item>
+			<ion-label class="light-italic text-comment">{{firstComment.content}}</ion-label>
+		</ion-item>
+	</ion-card> 
+	<ion-list>
+		<div style="margin-top: 10px;" *ngFor="let comment of comments">
+			<div>
+				<img style="width: 35px;" [src]="comment.author.profilePic" />
+				<span class="medium">{{comment.author.name}}</span>
+				<div style="float:right;margin-top: 15px;">
+					<ion-icon class="comment-star" [name]="getCommentStar(comment,1)"></ion-icon>
+					<ion-icon class="comment-star" [name]="getCommentStar(comment,2)"></ion-icon>
+					<ion-icon class="comment-star" [name]="getCommentStar(comment,3)"></ion-icon>
+					<ion-icon class="comment-star" [name]="getCommentStar(comment,4)"></ion-icon>
+					<ion-icon class="comment-star" [name]="getCommentStar(comment,5)"></ion-icon>
+				</div>
+			</div>
+			<ion-item>
+				<ion-label class="light-italic text-comment">{{comment.content}}</ion-label>
+			</ion-item>
+		</div>
+	</ion-list>
+
+</ion-content>

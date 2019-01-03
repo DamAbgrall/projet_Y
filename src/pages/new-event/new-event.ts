@@ -35,11 +35,11 @@ export class NewEventPage {
 
   constructor(public map: MapProvider, public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public actionSheetCtrl: ActionSheetController, public file: File, public crop: Crop, private camera: Camera, public request: RequestProvider,private formBuilder: FormBuilder) {
     this.event = this.formBuilder.group( {
-      "title": ,
-      "picture": "",
-      "startDate": ,
-      "endDate": ,
-      "isEnd": ,
+      "title": ['', Validators.required],
+      "picture": ['', Validators.required],
+      "startDate": ['', Validators.required],
+      "endDate": ['', Validators.required],
+      "isEnd": ['', Validators.required],
       "description": ['', Validators.required],
       "options": {
         "subValided": false,
@@ -48,21 +48,7 @@ export class NewEventPage {
       },
       "maxAttendees": ['', Validators.required],
       "category": this.selectedCategory,
-      "coordinates": {
-        "long": res[0].position.lng,
-        "lat": res[0].position.lat,
-      },
       "creator": this.request.userId,
-      "localisation": {
-        "place_id": this.autocomplete.place_id,
-        "long": res[0].position.lng,
-        "lat": res[0].position.lat,
-        "adress": addr,
-        "zip": res[0].postalCode,
-        "city": res[0].locality,
-        "country": res[0].country,
-        "name": this.autocomplete.description,
-      }
     });
     this.autocomplete.description = "";
     this.acService = new google.maps.places.AutocompleteService();
