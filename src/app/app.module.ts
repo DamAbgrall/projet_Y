@@ -26,6 +26,7 @@ import { MyEventPage } from '../pages/my-event/my-event';
 import { SettingsPage } from '../pages/settings/settings';
 import { ProfilePage } from '../pages/profile/profile';
 import { ModalFilterPage } from '../pages/modal-filter/modal-filter';
+import { ModalNotationPage } from '../pages/modal-notation/modal-notation';
 import { MapProvider } from '../providers/map/map';
 import { SocketProvider } from '../providers/socket/socket';
 import { RequestProvider } from '../providers/request/request';
@@ -47,7 +48,8 @@ import { FilterTag } from '../providers/filter-tag/filter-tag';
     SettingsPage,
     ModalFilterPage,
     FilterTag,
-    ProfilePage
+    ProfilePage,
+    ModalNotationPage
   ],
   imports: [
     BrowserModule,
@@ -67,7 +69,8 @@ import { FilterTag } from '../providers/filter-tag/filter-tag';
     MyEventPage,
     SettingsPage,
     ModalFilterPage,
-    ProfilePage
+    ProfilePage,
+    ModalNotationPage
   ],
   providers: [
     StatusBar,

@@ -1,0 +1,12 @@
+<div class="pop-up">
+  <h5 style="margin-top:0px" class="medium">Souhaitez vous noter {{event.author.name}} qui à origanisé {{event.name}}</h5>
+  <ion-range snaps="true" min="0" max="5" [(ngModel)]="mark">
+      <ion-label range-left>0</ion-label>
+      <ion-label range-right>5</ion-label>
+  </ion-range>
+  <ion-textarea class="size" placeholder="Commentaire"></ion-textarea>
+    <ion-row>
+      <ion-col col-8><button full color="secondary" class="medium" ion-button>Valider</button></ion-col>
+      <ion-col col-4><button full color="light" ion-button class="medium" (click)="close()">Ignorer</button></ion-col>
+    </ion-row>
+</div>

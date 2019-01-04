@@ -37,7 +37,7 @@
         "cordova-android": "7.0.0",
         "cordova-plugin-badge": "^0.8.7",
         "cordova-plugin-camera": "^4.0.3",
-        "cordova-plugin-crop": "^0.4.0",
+        "cordova-plugin-crop": "git+https://github.com/jeduan/cordova-plugin-crop.git",
         "cordova-plugin-device": "2.0.2",
         "cordova-plugin-facebook4": "~2.1.0",
         "cordova-plugin-file": "^6.0.1",

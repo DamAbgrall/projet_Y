@@ -30,14 +30,12 @@ page-modal-filter {
         height: 3.6rem;
         width: 3.6rem;
     }
+    .pop-up{
+        background-color: white;
+        margin :20% 5% 0% 5%;
+        padding:5px;
+    }
 }
-
-page-modal-filter.ion-page {
-    width: 90%;
-    height: 85%;
-    left:5%;
-    top:7.5%;
-  }
 ion-app.md [padding] .scroll-content {
     padding: 10px;
 }

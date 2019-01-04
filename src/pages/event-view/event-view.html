@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Evénement</ion-title>
+    <ion-title class="medium">Evénement</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -31,7 +31,7 @@
 
       <div *ngIf="eventTag.event.address != null">
         <p class="medium">
-          <b>{{eventTag.event.address[0].subThoroughfare}} {{eventTag.event.address[0].thoroughfare}} {{eventTag.event.address[0].postalCode}} {{eventTag.event.address[0].locality}}
+          <b >{{eventTag.event.address[0].subThoroughfare}} {{eventTag.event.address[0].thoroughfare}} {{eventTag.event.address[0].postalCode}} {{eventTag.event.address[0].locality}}
             {{eventTag.event.address[0].country}}
           </b>
         </p>

@@ -13,7 +13,6 @@ export class MyEventPage {
   eventList = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public map: MapProvider, public request: RequestProvider) {
-    console.log(this.eventList[0].dateEvent);
   }
   ionViewDidLoad() {
     this.request.getEventRadius().then(res=>{

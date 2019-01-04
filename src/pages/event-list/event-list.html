@@ -1,14 +1,14 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>Liste des événements</ion-title>
+        <ion-title class="medium">Liste des événements</ion-title>
     </ion-navbar>
 </ion-header>
 
 <ion-content>
-    <button ion-button [ngClass]="{'bg-gris':!evenement,'bc-bleu':evenement}" (click)="changeE()" class="top-btn">Evénement</button>
-    <button ion-button [ngClass]="{'bg-gris':!sortie,'bc-rouge':sortie}" (click)="changeS()" class="top-btn">Sortie</button>
-    <button ion-button [ngClass]="{'bg-gris':!pleinAir,'bc-vert':pleinAir}" (click)="changeP()" class="top-btn">Plein air</button>
-    <button ion-button [ngClass]="{'bg-gris':!loisir,'bc-jaune':loisir}" (click)="changeL()" class="top-btn">Loisir</button>
+    <button ion-button [ngClass]="{'bg-gris':!evenement,'bc-bleu':evenement}" (click)="changeE()" class="top-btn medium">Evénement</button>
+    <button ion-button [ngClass]="{'bg-gris':!sortie,'bc-rouge':sortie}" (click)="changeS()" class="top-btn medium">Sortie</button>
+    <button ion-button [ngClass]="{'bg-gris':!pleinAir,'bc-vert':pleinAir}" (click)="changeP()" class="top-btn medium">Plein air</button>
+    <button ion-button [ngClass]="{'bg-gris':!loisir,'bc-jaune':loisir}" (click)="changeL()" class="top-btn medium">Loisir</button>
     <ion-card [ngClass]="getColor(eventTag.event.category)" *ngFor="let eventTag of eventTagList">
         <div class="overlay">
             <div padding>

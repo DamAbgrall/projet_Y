@@ -1,16 +1,14 @@
-<ion-header>
+<div class="pop-up">
   <ion-navbar>
-    <ion-title>Filtres</ion-title>
+    <ion-title class="medium">Filtres</ion-title>
   </ion-navbar>
-</ion-header>
-
-
-<ion-content padding>
   <ion-item>
-    <ion-datetime placeholder="Date de début" displayFormat="YYYY-MM-DD HH:mm" cancelText="Annuler" doneText="Valider" [(ngModel)]="debut"></ion-datetime>
+    <ion-datetime placeholder="Date de début" displayFormat="DD-MM-YYYY" cancelText="Annuler" doneText="Valider"
+      [(ngModel)]="debut"></ion-datetime>
   </ion-item>
   <ion-item>
-    <ion-datetime placeholder="Date de fin" displayFormat="YYYY-MM-DD HH:mm" cancelText="Annuler" doneText="Valider" [(ngModel)]="fin"></ion-datetime>
+    <ion-datetime placeholder="Date de fin" displayFormat="DD-MM-YYYY" cancelText="Annuler" doneText="Valider"
+      [(ngModel)]="fin"></ion-datetime>
   </ion-item>
   <div style="display:-webkit-box">
     <button ion-button (click)="getCurrentPos()" class="my-loc-btn">
@@ -35,7 +33,8 @@
     </ion-select>
   </ion-item>
   <div style="min-height: 45px;margin: 10px 0px;">
-    <span style="font-size: 12px" *ngIf="TagList == null || TagList == undefined || TagList.length == 0">Pour ajouter des tags cliquez sur le plus</span>
+    <span class="light" style="font-size: 12px" *ngIf="TagList == null || TagList == undefined || TagList.length == 0">Pour ajouter
+      des tags cliquez sur le plus</span>
     <div *ngIf="TagList==[]" class="light">Aouter des tag en cliquant sur le +</div>
     <ion-chip *ngFor="let tag of TagList">
       <ion-label class="medium">#{{tag}}</ion-label>
@@ -43,8 +42,7 @@
         <ion-icon name="close-circle"></ion-icon>
       </button>
     </ion-chip>
-    <button (click)="showTagModal()" class="add-tag-btn" ion-button
-      round icon-only>
+    <button (click)="showTagModal()" class="add-tag-btn" ion-button round icon-only>
       <ion-icon name="add"></ion-icon>
     </button>
   </div>
@@ -52,5 +50,4 @@
     <button (click)="filter()" class="button-size medium" ion-button>Rechercher</button>
     <button (click)="cancel()" class="button-size medium" ion-button>Annuler</button>
   </div>
-
-</ion-content>
+</div>

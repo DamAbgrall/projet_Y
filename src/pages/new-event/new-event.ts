@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ModalController, NavController, NavParams, ActionSheetController } from 'ionic-angular';
 import { ModalTagPage } from '../modal-tag/modal-tag';
 import { Camera } from '@ionic-native/camera';
-import { Crop } from '@ionic-native/crop';
+import { Crop,CropOptions } from '@ionic-native/crop';
 import { File } from '@ionic-native/file';
 import { RequestProvider } from '../../providers/request/request';
 import { MapProvider } from '../../providers/map/map';
@@ -31,25 +31,10 @@ export class NewEventPage {
   addressChosen: Boolean = false;
   location: any;
   selectedCategory: any;
-  event : FormGroup;
+  event: any ={};
 
   constructor(public map: MapProvider, public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public actionSheetCtrl: ActionSheetController, public file: File, public crop: Crop, private camera: Camera, public request: RequestProvider,private formBuilder: FormBuilder) {
-    this.event = this.formBuilder.group( {
-      "title": ['', Validators.required],
-      "picture": ['', Validators.required],
-      "startDate": ['', Validators.required],
-      "endDate": ['', Validators.required],
-      "isEnd": ['', Validators.required],
-      "description": ['', Validators.required],
-      "options": {
-        "subValided": false,
-        "hideAddr": this.inscription,
-        "subscription": this.inscription
-      },
-      "maxAttendees": ['', Validators.required],
-      "category": this.selectedCategory,
-      "creator": this.request.userId,
-    });
+    console.log(new Date())
     this.autocomplete.description = "";
     this.acService = new google.maps.places.AutocompleteService();
     this.autocompleteItems = [];
@@ -141,7 +126,11 @@ export class NewEventPage {
     this.camera.getPicture(options).then((imagePath) => {
       // Special handling for Android library
       console.log(imagePath);
-      this.crop.crop(imagePath).then(newImage => {
+      var option : CropOptions={
+        targetWidth:360,
+        targetHeight:160
+      }
+      this.crop.crop(imagePath,option).then(newImage => {
         //l'image taille normal
         var tempPathArray = imagePath.split('/');
         console.log(tempPathArray);
