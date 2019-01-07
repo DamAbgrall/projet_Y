@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { ModalController, NavController, NavParams, ActionSheetController } from 'ionic-angular';
 import { ModalTagPage } from '../modal-tag/modal-tag';
+import { CropModalPage } from '../crop-modal/crop-modal';
 import { Camera } from '@ionic-native/camera';
-import { Crop,CropOptions } from '@ionic-native/crop';
+import { Crop } from '@ionic-native/crop';
 import { File } from '@ionic-native/file';
 import { RequestProvider } from '../../providers/request/request';
 import { MapProvider } from '../../providers/map/map';
-import {Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
 declare var google: any;
 
@@ -31,10 +32,9 @@ export class NewEventPage {
   addressChosen: Boolean = false;
   location: any;
   selectedCategory: any;
-  event: any ={};
+  event: any = {};
 
-  constructor(public map: MapProvider, public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public actionSheetCtrl: ActionSheetController, public file: File, public crop: Crop, private camera: Camera, public request: RequestProvider,private formBuilder: FormBuilder) {
-    console.log(new Date())
+  constructor(public map: MapProvider, public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public actionSheetCtrl: ActionSheetController, public file: File, public crop: Crop, private camera: Camera, public request: RequestProvider, private formBuilder: FormBuilder) {
     this.autocomplete.description = "";
     this.acService = new google.maps.places.AutocompleteService();
     this.autocompleteItems = [];
@@ -126,46 +126,12 @@ export class NewEventPage {
     this.camera.getPicture(options).then((imagePath) => {
       // Special handling for Android library
       console.log(imagePath);
-      var option : CropOptions={
-        targetWidth:360,
-        targetHeight:160
-      }
-      this.crop.crop(imagePath,option).then(newImage => {
-        //l'image taille normal
-        var tempPathArray = imagePath.split('/');
-        console.log(tempPathArray);
-        var fileName = tempPathArray.pop().replace('-cropped', '').split('?')[0];
-        var filePath = "";
-        for (let str of tempPathArray) {
-          if (filePath == '') {
-            filePath = str;
-          } else {
-            filePath = filePath + '/' + str;
-          }
-        }
-        this.file.removeFile(filePath, fileName).then(data => {
-          console.log(data);
-        }).catch(err => {
-          console.error(err);
-        })
-        console.log(newImage);
-        var tempPathnewImage = newImage.split('/');
-        var newFileName = tempPathnewImage.pop().split('?')[0];
-        var newFilePath = "";
-        for (let str of tempPathnewImage) {
-          if (newFilePath == '') {
-            newFilePath = str;
-          } else {
-            newFilePath = newFilePath + '/' + str;
-          }
-        }
-        this.lastImage = newImage;
-        this.file.readAsDataURL(newFilePath, newFileName).then(res => {
-          console.log(res);
-        }).catch(err => {
-          console.error(err);
-        })
-      });
+      let modalCrop = this.modalCtrl.create(CropModalPage,{"image":imagePath});
+      modalCrop.onDidDismiss(data=>{
+        this.lastImage=data;
+        console.log(data);
+      })
+      modalCrop.present();
     }, (err) => {
       console.error(err);
     });

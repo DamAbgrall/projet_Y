@@ -23,6 +23,7 @@ import { ModalTagPage } from '../pages/modal-tag/modal-tag';
 import { EventListPage } from '../pages/event-list/event-list';
 import { EventViewPage } from '../pages/event-view/event-view';
 import { MyEventPage } from '../pages/my-event/my-event';
+import { CropModalPage } from '../pages/crop-modal/crop-modal';
 import { SettingsPage } from '../pages/settings/settings';
 import { ProfilePage } from '../pages/profile/profile';
 import { ModalFilterPage } from '../pages/modal-filter/modal-filter';
@@ -33,6 +34,7 @@ import { RequestProvider } from '../providers/request/request';
 
 import { Socket } from 'ng-socket-io';
 import { FilterTag } from '../providers/filter-tag/filter-tag';
+import { AngularCropperjsModule } from 'angular-cropperjs';
 
 @NgModule({
   declarations: [
@@ -49,12 +51,14 @@ import { FilterTag } from '../providers/filter-tag/filter-tag';
     ModalFilterPage,
     FilterTag,
     ProfilePage,
-    ModalNotationPage
+    ModalNotationPage,
+    CropModalPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
+    AngularCropperjsModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -70,7 +74,8 @@ import { FilterTag } from '../providers/filter-tag/filter-tag';
     SettingsPage,
     ModalFilterPage,
     ProfilePage,
-    ModalNotationPage
+    ModalNotationPage,
+    CropModalPage
   ],
   providers: [
     StatusBar,
